@@ -17,7 +17,7 @@
         :collapsible="true"
         @menuSelect="menuSelect"
       ></side-menu>
-    </a-drawer> 
+    </a-drawer>
 
     <side-menu
       v-else-if="isSideMenu()"
