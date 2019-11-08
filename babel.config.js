@@ -12,6 +12,11 @@ plugins.push(['import', {
   'libraryDirectory': 'es',
   'style': true // `style: true` 会加载 less 文件
 }])
+plugins.push(['import', {
+  libraryName: 'vant',
+  libraryDirectory: 'es',
+  style: true
+}, 'vant'])
 
 module.exports = {
   presets: [
