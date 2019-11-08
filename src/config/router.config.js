@@ -34,7 +34,7 @@ export const asyncRouterMap = [
         ]
       },
 
-      // list
+      // address
       {
         path: '/address',
         name: 'address',

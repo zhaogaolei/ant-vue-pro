@@ -1,3 +1,5 @@
+/* 路由权限控制 */
+
 import Vue from 'vue'
 import router from './router'
 import store from './store'
