@@ -14,7 +14,7 @@ export const asyncRouterMap = [
       {
         path: '/newpage',
         name: 'newpage',
-        component: () => import('../views/newPage/NewPage'),
+        component: () => import('@/views/newPage/NewPage'),
         meta: { title: '新增页面', icon: 'profile' }
       },
       // 订单管理
