@@ -9,6 +9,7 @@ module.exports = {
   ],
 
   rules: {
+    "no-unused-vars": [1, {"vars": "all", "args": "after-used"}],//2不能有声明后未被使用的变量或参数
     'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'generator-star-spacing': 'off',

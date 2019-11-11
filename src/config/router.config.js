@@ -1,69 +1,40 @@
 // eslint-disable-next-line
 import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layouts'
+// 引入移动端路由
+import mRouterMap from './router.config.m'
 
 export const asyncRouterMap = [
-
+  // pc 路由配置
   {
     path: '/',
     name: 'index',
     component: BasicLayout,
     meta: { title: '首页' },
-    redirect: '/newpage',
+    redirect: '/index',
     children: [
-      // 新增页面
+      // 主页
       {
-        path: '/newpage',
-        name: 'newpage',
-        component: () => import('@/views/newPage/NewPage'),
-        meta: { title: '新增页面', icon: 'profile' }
+        path: '/index',
+        name: 'index',
+        component: () => import('@/views/home/index'),
+        meta: { title: '主页', icon: 'home' }
       },
       // 订单管理
       {
-        path: '/order',
-        name: 'order',
-        redirect: '/order/manage',
+        path: '/product',
+        name: 'product',
+        redirect: '/product/index',
         component: RouteView,
-        meta: { title: '订单管理', keepAlive: true, icon: 'profile' },
+        meta: { title: '商品管理', keepAlive: true, icon: 'profile' },
         children: [
           {
-            path: '/order/manage',
-            name: 'OrderManage',
-            component: () => import('../views/order/OrderManage.vue'),
-            meta: { title: '订单列表', keepAlive: false }
+            path: '/product/index',
+            name: 'ProductManage',
+            component: () => import('../views/product/Index.vue'),
+            meta: { title: '商品列表', keepAlive: false }
           }
         ]
       },
-
-      // address
-      {
-        path: '/address',
-        name: 'address',
-        component: PageView,
-        redirect: '/address/table-list',
-        meta: { title: '地址管理', icon: 'table', permission: [ 'table' ] },
-        children: [
-          {
-            path: '/address/table-list/:pageNo([1-9]\\d*)?',
-            name: 'TableListWrapper',
-            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-            component: () => import('@/views/address/TableList'),
-            meta: { title: '查询表格', keepAlive: true, permission: [ 'table' ] }
-          },
-          {
-            path: '/address/basic-list',
-            name: 'BasicList',
-            component: () => import('@/views/address/StandardList'),
-            meta: { title: '标准列表', keepAlive: true, permission: [ 'table' ] }
-          },
-          {
-            path: '/address/card',
-            name: 'CardList',
-            component: () => import('@/views/address/CardList'),
-            meta: { title: '卡片列表', keepAlive: true, permission: [ 'table' ] }
-          }
-        ]
-      },
-
       // 系统设置
       {
         path: '/system',
@@ -80,6 +51,7 @@ export const asyncRouterMap = [
           }
         ]
       },
+
       // Exception
       {
         path: '/exception',
@@ -112,7 +84,9 @@ export const asyncRouterMap = [
   },
   {
     path: '*', redirect: '/404', hidden: true
-  }
+  },
+  // 加入移动端路由
+  mRouterMap
 ]
 
 /**
@@ -148,20 +122,6 @@ export const constantRouterMap = [
       }
     ]
   },
-
-  {
-    path: '/test',
-    component: BlankLayout,
-    redirect: '/test/home',
-    children: [
-      {
-        path: 'home',
-        name: 'TestHome',
-        component: () => import('@/views/Home')
-      }
-    ]
-  },
-
   {
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')

@@ -4,29 +4,6 @@
       插槽，用来显示面包屑和标题,可通过路由配置是否显示
     </div>
     <div>是否手机模式：{{ this.isMobile() }}</div>
-    <div v-if="this.isDesktop()">
-      AntdDate:
-      <a-date-picker @change="onChange" />
-    </div>
-    <div v-if="this.isMobile()">
-      <van-field
-        v-model="value"
-        label="VantDate"
-        disabled
-        @click="onInputClick"
-        placeholder="选择日期" />
-      <van-popup
-        v-model="show"
-        position="bottom"
-        :style="{ height: '50%' }"
-      >
-        <van-datetime-picker
-          @confirm="onDateConfirm"
-          @cancel="onDateCancel"
-          v-model="currentDate"/>
-      </van-popup>
-
-    </div>
   </page-view>
 
 </template>
@@ -35,7 +12,7 @@
 import { PageView } from '@/layouts'
 import { mixin, mixinDevice } from '@/utils/mixin'
 export default {
-  name: 'NewPage',
+  name: 'HomeIndex',
   mixins: [mixin, mixinDevice],
   components: {
     PageView
@@ -52,6 +29,9 @@ export default {
     }
   },
   mounted () {
+    if (this.isMobile() || this.isTablet()) {
+      this.$router.push({ path: '/m/index' })
+    }
   },
   methods: {
     onChange (date, dateString) {
