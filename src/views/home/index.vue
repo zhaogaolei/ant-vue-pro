@@ -4,6 +4,10 @@
       插槽，用来显示面包屑和标题,可通过路由配置是否显示
     </div>
     <div>是否手机模式：{{ this.isMobile() }}</div>
+    <br />
+    <div>
+      <a href="/mobile/product">跳转移动页面</a>
+    </div>
   </page-view>
 
 </template>

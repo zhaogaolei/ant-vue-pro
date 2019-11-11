@@ -1,7 +1,7 @@
 <template>
-  <pagg-view>
+  <page-view>
     <div>商品列表</div>
-  </pagg-view>
+  </page-view>
 
 </template>
 

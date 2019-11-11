@@ -32,17 +32,45 @@ const prodExternals = {
   vuex: 'Vuex',
   axios: 'axios'
 }
-
+const objectProject = {
+  index: {
+    entry: 'src/main.js', // page 的入口
+    template: 'public/index.html', // 模板来源
+    filename: 'index.html', // 在 dist/index.html 的输出
+    // 当使用 title 选项时，template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+    title: 'Index Page',
+    // 在这个页面中包含的块，默认情况下会包含,提取出来的通用 chunk 和 vendor chunk。
+    chunks: ['chunk-vendors', 'chunk-common', 'index']
+  },
+  m: {
+    entry: 'src/m/main.js',
+    template: 'src/m/m.html',
+    filename: 'm.html',
+    title: 'Index Page',
+    chunks: ['chunk-vendors', 'chunk-common', 'm']
+  }
+}
+let page = {}
+const projectname = process.argv[3] // 获取执行哪个文件
+if (process.env.NODE_ENV === 'development') {
+  page = objectProject
+} else {
+  page[projectname] = objectProject[projectname]
+}
 // vue.config.js
 const vueConfig = {
+  outputDir: 'dist/' + projectname, // 标识是打包哪个文件
+  // 默认情况下，生成的静态资源在它们的文件名中包含了 hash 以便更好的控制缓存。如果你无法使用 Vue CLI 生成的 index HTML，你可以通过将这个选项设为 false 来关闭文件名哈希。
+  filenameHashing: true,
+  pages: page,
   configureWebpack: {
     // webpack plugins
     plugins: [
       // Ignore all locale files of moment.js
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-    ],
+    ]
     // if prod is on, add externals
-    externals: isProd() ? prodExternals : {}
+    // externals: isProd() ? prodExternals : {}
   },
 
   chainWebpack: (config) => {
@@ -67,12 +95,12 @@ const vueConfig = {
 
     // if prod is on
     // assets require on cdn
-    if (isProd()) {
-      config.plugin('html').tap(args => {
-        args[0].cdn = assetsCDN
-        return args
-      })
-    }
+    // if (isProd()) {
+    //   config.plugin('html').tap(args => {
+    //     args[0].cdn = assetsCDN
+    //     return args
+    //   })
+    // }
   },
 
   css: {
