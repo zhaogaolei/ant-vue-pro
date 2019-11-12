@@ -37,7 +37,7 @@ npm run build-index
 
 - 编译mobile包
 ```
-npm run build-index
+npm run build-m
 ```
 
 - Lints and fixes files
