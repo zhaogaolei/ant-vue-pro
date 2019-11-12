@@ -38,16 +38,15 @@ const objectProject = {
     template: 'public/index.html', // 模板来源
     filename: 'index.html', // 在 dist/index.html 的输出
     // 当使用 title 选项时，template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-    title: 'Index Page',
+    title: 'PC',
     // 在这个页面中包含的块，默认情况下会包含,提取出来的通用 chunk 和 vendor chunk。
     chunks: ['chunk-vendors', 'chunk-common', 'index']
   },
-  m: {
+  mobile: {
     entry: 'src/m/main.js',
-    template: 'src/m/m.html',
-    filename: 'm.html',
-    title: 'Index Page',
-    chunks: ['chunk-vendors', 'chunk-common', 'm']
+    filename: process.env.NODE_ENV === 'development' ? 'mobile.html' : 'index.html',
+    title: 'Mobile',
+    chunks: ['chunk-vendors', 'chunk-common', 'mobile']
   }
 }
 let page = {}
@@ -59,7 +58,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 // vue.config.js
 const vueConfig = {
-  outputDir: 'dist/' + projectname, // 标识是打包哪个文件
+  outputDir: 'dist' + projectname, // 标识是打包哪个文件
   // 默认情况下，生成的静态资源在它们的文件名中包含了 hash 以便更好的控制缓存。如果你无法使用 Vue CLI 生成的 index HTML，你可以通过将这个选项设为 false 来关闭文件名哈希。
   filenameHashing: true,
   pages: page,
@@ -121,8 +120,8 @@ const vueConfig = {
 
   devServer: {
     // development server port 8000
-    port: 8000,
-    open: true
+    port: 8000
+    // open: true
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
     // proxy: {
     //   '/api': {

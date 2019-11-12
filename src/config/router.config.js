@@ -1,7 +1,5 @@
 // eslint-disable-next-line
 import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layouts'
-// 引入移动端路由
-import mRouterMap from './router.config.m'
 
 export const asyncRouterMap = [
   // pc 路由配置
@@ -84,9 +82,7 @@ export const asyncRouterMap = [
   },
   {
     path: '*', redirect: '/404', hidden: true
-  },
-  // 加入移动端路由
-  mRouterMap
+  }
 ]
 
 /**

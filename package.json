@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "build-index": "vue-cli-service build index",
-    "build-m": "vue-cli-service build m",
+    "build-m": "vue-cli-service build mobile",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",

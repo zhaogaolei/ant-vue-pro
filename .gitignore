@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+/distindex
+/distmobile
 package-lock.json
 
 # local env files

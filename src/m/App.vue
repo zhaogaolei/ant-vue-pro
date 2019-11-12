@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div>
-      <a href="/index">跳转PC页面</a>
-    </div>
+    主页
     <router-view></router-view>
     <van-tabbar v-model="active">
       <van-tabbar-item icon="hotel-o" to="/mobile/product" url="http://www.baidu.com">商品</van-tabbar-item>
@@ -16,7 +14,7 @@
 export default {
   data () {
     return {
-      locale: 'zhCN'
+      active: 0
     }
   },
   mounted () {

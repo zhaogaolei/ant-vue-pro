@@ -6,7 +6,6 @@
     <div>是否手机模式：{{ this.isMobile() }}</div>
     <br />
     <div>
-      <a href="/mobile/product">跳转移动页面</a>
     </div>
   </page-view>
 
@@ -33,9 +32,7 @@ export default {
     }
   },
   mounted () {
-    if (this.isMobile() || this.isTablet()) {
-      this.$router.push({ path: '/m/index' })
-    }
+
   },
   methods: {
     onChange (date, dateString) {

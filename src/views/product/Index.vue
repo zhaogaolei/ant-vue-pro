@@ -19,9 +19,7 @@ export default {
     }
   },
   mounted () {
-    if (this.isMobile() || this.isTablet()) {
-      this.$router.push({ path: '/m/product' })
-    }
+
   },
   methods: {
   }
