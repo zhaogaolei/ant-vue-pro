@@ -30,9 +30,14 @@ npm install
 npm start
 ```
 
-- 编译项目
+- 编译PC包
 ```
-npm run build
+npm run build-index
+```
+
+- 编译mobile包
+```
+npm run build-index
 ```
 
 - Lints and fixes files
