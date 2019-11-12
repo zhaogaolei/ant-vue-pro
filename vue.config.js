@@ -44,6 +44,7 @@ const objectProject = {
   },
   m: {
     entry: 'src/m/main.js',
+    template: process.env.NODE_ENV === 'development' ? 'src/m/mobile.html' : 'public/index.html',
     filename: process.env.NODE_ENV === 'development' ? 'm.html' : 'index.html',
     title: 'Mobile',
     chunks: ['chunk-vendors', 'chunk-common', 'm']
@@ -58,7 +59,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 // vue.config.js
 const vueConfig = {
-  outputDir: 'dist_' + projectname, // 标识是打包哪个文件
+  outputDir: 'dist/' + projectname, // 标识是打包哪个文件
   // 默认情况下，生成的静态资源在它们的文件名中包含了 hash 以便更好的控制缓存。如果你无法使用 Vue CLI 生成的 index HTML，你可以通过将这个选项设为 false 来关闭文件名哈希。
   filenameHashing: true,
   pages: page,
