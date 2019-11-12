@@ -5,6 +5,7 @@
 - Vue.config.js: https://cli.vuejs.org/zh/config/#%E5%85%A8%E5%B1%80-cli-%E9%85%8D%E7%BD%AE
 - vue router: https://router.vuejs.org/zh/guide/
 - vuex ：https://vuex.vuejs.org/zh/
+- Vant : https://youzan.github.io/vant/
 - antd框架参考: https://pro.loacg.com/docs/getting-started
 - 更新日志: https://pro.loacg.com/docs/changelog
 - 常见问题: https://pro.loacg.com/docs/faq

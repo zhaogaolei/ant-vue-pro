@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { BlankLayout, TabLayout } from '../layouts'
 
 Vue.use(Router)
 
@@ -8,19 +9,31 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/mobile',
-      name: 'mobile',
-      redirect: '/mobile/product',
-      component: () => import('../views/home/Index.vue'),
+      path: '/m',
+      name: 'm',
+      redirect: '/m/login',
+      component: BlankLayout,
       children: [
         {
-          path: '/mobile/product',
-          name: 'mobileProduct',
+          path: '/m/login',
+          name: 'mLogin',
+          component: () => import('../views/login/Index.vue')
+        }
+      ]
+    },
+    {
+      path: '/m',
+      name: 'm',
+      component: TabLayout,
+      children: [
+        {
+          path: '/m/product',
+          name: 'mProduct',
           component: () => import('../views/product/Index.vue')
         },
         {
-          path: '/mobile/supply',
-          name: 'mobileSupply',
+          path: '/m/supply',
+          name: 'mSupply',
           component: () => import('../views/supply/Index.vue')
         }
       ]
