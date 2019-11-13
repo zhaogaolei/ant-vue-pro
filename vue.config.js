@@ -44,7 +44,7 @@ const objectProject = {
   },
   m: {
     entry: 'src/m/main.js',
-    template: process.env.NODE_ENV === 'development' ? 'src/m/mobile.html' : 'public/index.html',
+    template: 'src/m/mobile.html',
     filename: process.env.NODE_ENV === 'development' ? 'm.html' : 'index.html',
     title: 'Mobile',
     chunks: ['chunk-vendors', 'chunk-common', 'm']
