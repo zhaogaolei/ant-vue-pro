@@ -1,54 +1,159 @@
 <template class="login">
   <div class="login">
-    <h2>登录</h2>
-    <van-cell-group>
-      <van-field
-        v-model="username"
-        required
-        label="用户名"
-        placeholder="请输入用户名"
-      />
-
-      <van-field
-        v-model="password"
-        type="password"
-        label="密码"
-        placeholder="请输入密码"
-        required
-      />
-    </van-cell-group>
-    <van-button type="primary" @click="this.onLogin">登录</van-button>
+    <img class="logo" :src="zmLogo"/>
+    <div class="logoName">周末酒店商户版</div>
+    <div class="inputOut">
+      <van-tabs
+        @click="onClick"
+        line-width="35"
+        line-height="3"
+        title-active-color="#323233"
+        title-inactive-color="#969799">
+        <van-tab title="密码登录" class="inputArea">
+          <van-field
+            class="input"
+            v-model="username"
+            placeholder="请输入账号"
+          />
+          <van-field
+            class="input"
+            v-model="password"
+            type="password"
+            right-icon="closed-eye"
+            placeholder="请输入密码"
+          />
+        </van-tab>
+        <van-tab title="验证码登录" class="inputArea">
+          <van-field
+            class="input"
+            v-model="username"
+            placeholder="请输入手机号"
+          />
+          <div class="captchaOut">
+            <van-field
+              class="inputCaptcha"
+              v-model="password"
+              type="password"
+              placeholder="请输入验证码"
+            /><van-button class="getCaptcha" type="danger">获取验证码</van-button>
+          </div>
+        </van-tab>
+      </van-tabs>
+      <van-button class="btn" type="danger" @click="this.onLogin">登录</van-button>
+    </div>
   </div>
 </template>
 <script>
-
-import Vue from 'vue'
-import { CellGroup, Button } from 'vant'
-Vue.use(Button).use(CellGroup)
+import md5 from 'md5'
+import { mapActions } from 'vuex'
+import zmLogo from '@/assets/m/image/Mask.svg'
 
 export default {
   name: 'MLogin',
   data () {
     return {
+      zmLogo: zmLogo,
       username: '',
       password: ''
     }
   },
   methods: {
+    ...mapActions(['Login', 'Logout']),
+    onClick (name, title) {
+      // this.$toast(title)
+    },
     onLogin () {
       console.log(`用户名：${this.username},密码：${this.password}`)
+      window.localStorage.setItem('TOKEN', '测试路由拦截')
+      // 登录操作成功
+      this.loginSuccess({ code: 0, result: {} })
+    },
+    loginSuccess (res) {
+      console.log(res)
+      // 处理重定向
+      const redirect = this.$router.currentRoute.query.redirect
+      if (this.$router.currentRoute.query.redirect) {
+        this.$router.push(redirect)
+      } else {
+        this.$router.push({ path: '/m/product' })
+      }
+    },
+    requestFailed (err) {
+      this.isLoginError = true
+      this.$notification['error']({
+        message: '错误',
+        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
+        duration: 4
+      })
     }
   }
 }
 </script>
 
-<style scoped>
-.login {
+<style scoped lang='less'>
+  .vanTabs{
+    border-radius: 8px;
+  }
+ .login{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-align: center;
     flex-direction: column;
-}
+    align-items: center;
+    .logo{
+      margin-top: 96px;
+    }
+    .logoName{
+      width: 98px;
+      height: 20px;
+      opacity: 1;
+      font-size: 14px;
+      font-weight: Regular;
+      font-family: PingFangSC;
+      color: #323233;
+      line-height: 20px;
+      letter-spacing: 0px;
+      margin: 12px 0 49px 0;
+    }
+   .inputOut{
+      width: 327px;
+      height: 285px;
+      opacity: 1;
+      background: #ffffff;
+      box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.12);
+      text-align: center;
+      border-radius: 8px;
+      .inputArea{
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .input{
+          width: 279px;
+          height: 44px;
+          background: #F7F8FA;
+          margin-bottom: 12px;
+        }
+        .captchaOut {
+          width: 279px;
+          display: flex;
+          margin-bottom: 12px;
+          .inputCaptcha{
+            width: 167px;
+            height: 44px;
+            opacity: 1;
+            background: rgba(247,248,250,1);
+          }
+          .getCaptcha{
+            width: 104px;
+            margin-left: 8px;
+          }
+        }
+      }
+      .btn{
+        width: 279px;
+        height: 44px;
+        opacity: 1;
+        margin-top: 24px;
+      }
+   }
+ }
 </style>

@@ -13,14 +13,13 @@ export default {
     }
   },
   mounted () {
-    console.log('移动端页面======================')
+
   }
 }
 </script>
 <style>
-
   #app {
-
+    background: #F7F8FA;
     height: 100%;
   }
 </style>

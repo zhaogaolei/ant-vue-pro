@@ -9,6 +9,7 @@
 - antd框架参考: https://pro.loacg.com/docs/getting-started
 - 更新日志: https://pro.loacg.com/docs/changelog
 - 常见问题: https://pro.loacg.com/docs/faq
+- HTML5 History模式后端配置例子： https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90
 
 
 

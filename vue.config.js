@@ -57,8 +57,10 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   page[projectname] = objectProject[projectname]
 }
+console.log('start building.......')
 // vue.config.js
 const vueConfig = {
+  publicPath: isProd() ? './' : '/', // 部署应用包时的基本 URL
   outputDir: 'dist/' + projectname, // 标识是打包哪个文件
   // 默认情况下，生成的静态资源在它们的文件名中包含了 hash 以便更好的控制缓存。如果你无法使用 Vue CLI 生成的 index HTML，你可以通过将这个选项设为 false 来关闭文件名哈希。
   filenameHashing: true,
@@ -95,12 +97,12 @@ const vueConfig = {
 
     // if prod is on
     // assets require on cdn
-    // if (isProd()) {
-    //   config.plugin('html').tap(args => {
-    //     args[0].cdn = assetsCDN
-    //     return args
-    //   })
-    // }
+    if (isProd()) {
+      // config.plugin('html').tap(args => {
+      //   args[0].cdn = assetsCDN
+      //   return args
+      // })
+    }
   },
 
   css: {
@@ -108,7 +110,6 @@ const vueConfig = {
       less: {
         modifyVars: {
           // less vars，customize ant design theme
-
           // 'primary-color': '#F5222D',
           // 'link-color': '#F5222D',
           // 'border-radius-base': '4px'
@@ -146,5 +147,20 @@ if (process.env.VUE_APP_PREVIEW === 'true') {
   // add `ThemeColorReplacer` plugin to webpack plugins
   vueConfig.configureWebpack.plugins.push(createThemeColorReplacerPlugin())
 }
-
+console.log('构建项目======================>：' + (projectname || '开发环境'))
+/* 打包发布时：需要加入以下判断，if (projectname === 'm')  PC端不需要rem，M端需要rem！！！
+ * dev开发时：
+ * 开发pc时-> if (projectname === 'm') ;
+ * 开发M时-> if (projectname === 'm' || process.env.NODE_ENV === 'development')
+ */
+if (projectname === 'm' || process.env.NODE_ENV === 'development') {
+  vueConfig.css.loaderOptions.postcss = {
+    plugins: [
+      require('postcss-pxtorem')({
+        rootValue: 37.5, // 换算的基数
+        propList: ['*']
+      })
+    ]
+  }
+}
 module.exports = vueConfig

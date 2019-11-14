@@ -12,7 +12,7 @@ Router.prototype.push = function push (location, onResolve, onReject) {
 Vue.use(Router)
 console.log('process.env.BASE_URL', process.env.BASE_URL)
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap

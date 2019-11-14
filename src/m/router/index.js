@@ -5,7 +5,7 @@ import { BlankLayout, TabLayout } from '../layouts'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -17,6 +17,7 @@ export default new Router({
         {
           path: '/m/login',
           name: 'mLogin',
+          meta: { title: '登录' },
           component: () => import('../views/login/Index.vue')
         }
       ]
@@ -29,11 +30,17 @@ export default new Router({
         {
           path: '/m/product',
           name: 'mProduct',
+          meta: {
+            title: '商品管理'
+          },
           component: () => import('../views/product/Index.vue')
         },
         {
           path: '/m/supply',
           name: 'mSupply',
+          meta: {
+            title: '供应商管理'
+          },
           component: () => import('../views/supply/Index.vue')
         }
       ]

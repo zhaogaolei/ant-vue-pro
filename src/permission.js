@@ -11,8 +11,6 @@ import { setDocumentTitle, domTitle } from '@/utils/domUtil'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
-// mobile路由namelist
-const mobileList = ['mLogin']
 
 const whiteList = ['login', 'register', 'registerResult'] // no redirect whitelist
 const defaultRoutePath = '/newpage'
@@ -59,7 +57,7 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    if (whiteList.includes(to.name) || mobileList.includes(to.name)) {
+    if (whiteList.includes(to.name)) {
       // 在免登录白名单，直接进入
       next()
     } else {

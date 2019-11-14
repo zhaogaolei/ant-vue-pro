@@ -49,12 +49,6 @@ import {
   notification
 } from 'ant-design-vue'
 // import VueCropper from 'vue-cropper'
-// vant
-import {DatetimePicker,Popup,Field,Tabbar, TabbarItem } from 'vant'
-Vue.use(DatetimePicker)
-Vue.use(Popup)
-Vue.use(Field)
-Vue.use(Tabbar).use(TabbarItem)
 
 // antd
 Vue.use(LocaleProvider)
