@@ -4,9 +4,11 @@
     <div class="logoName">周末酒店商户版</div>
     <div class="inputOut">
       <van-tabs
+        class="zm-vanTabs"
         @click="onClick"
-        line-width="35"
-        line-height="3"
+        :border="false"
+        :line-width="35"
+        :line-height="3"
         title-active-color="#323233"
         title-inactive-color="#969799">
         <van-tab title="密码登录" class="inputArea">
@@ -91,9 +93,6 @@ export default {
 </script>
 
 <style scoped lang='less'>
-  .vanTabs{
-    border-radius: 8px;
-  }
  .login{
     display: flex;
     flex-direction: column;
@@ -102,7 +101,6 @@ export default {
       margin-top: 96px;
     }
     .logoName{
-      width: 98px;
       height: 20px;
       opacity: 1;
       font-size: 14px;
@@ -121,6 +119,9 @@ export default {
       box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.12);
       text-align: center;
       border-radius: 8px;
+      .zm-vanTabs{
+        padding-top: 5px;
+      }
       .inputArea{
         margin-top: 24px;
         display: flex;
