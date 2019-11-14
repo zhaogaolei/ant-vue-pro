@@ -11,7 +11,10 @@
 - 常见问题: https://pro.loacg.com/docs/faq
 - HTML5 History模式后端配置例子： https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90
 
-
+# 项目介绍
+```
+本项目集成了PC端和M端，一个工程2个项目，PC使用antd-vue 组件，M端使用Vant-vue组件
+```
 
 项目下载和运行
 ----
