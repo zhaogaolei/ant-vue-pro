@@ -77,7 +77,7 @@ export default {
       if (this.$router.currentRoute.query.redirect) {
         this.$router.push(redirect)
       } else {
-        this.$router.push({ path: '/m/product' })
+        this.$router.push({ path: '/home' })
       }
     },
     requestFailed (err) {
@@ -99,6 +99,8 @@ export default {
     align-items: center;
     .logo{
       margin-top: 96px;
+      width: 60px;
+      height: 60px;
     }
     .logoName{
       height: 20px;

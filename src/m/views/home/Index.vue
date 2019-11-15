@@ -1,21 +1,25 @@
 <template>
-  <div>
-    <h2>移动首页</h2>
-
-    <router-view></router-view>
-    <van-tabbar v-model="active">
-      <van-tabbar-item icon="hotel-o" to="/mobile/product" url="http://www.baidu.com">商品</van-tabbar-item>
-      <van-tabbar-item icon="user-o" to="/mobile/supply">我</van-tabbar-item>
-    </van-tabbar>
+  <div class="home">
+    <van-grid :gutter="10" :column-num="1" :clickable="true">
+      <van-grid-item
+        v-for="item in itemList"
+        :key="item.text"
+        :text="item.text"
+        :to="item.to"
+      />
+    </van-grid>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MobileProduct',
+  name: 'Home',
   data () {
     return {
-      active: 0
+      itemList: [
+        { text: '商品管理', to: '/product' },
+        { text: '供应商管理', to: '/supply' }
+      ]
     }
   },
   mounted () {
@@ -25,5 +29,9 @@ export default {
 </script>
 
 <style scoped>
-
+  .home{
+    background: #ffffff;
+    height: 100vh;
+    padding-top: 24px;
+  }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    商品管理
+    添加商品页面
     测试字体：
     <span class="iconfont icon-img_ptj"></span>
     <span class="iconfont icon-img_msj"></span>

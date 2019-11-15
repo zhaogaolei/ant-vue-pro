@@ -13,8 +13,8 @@ import { ACCESS_TOKEN } from '@/store/mutation-types'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['mLogin'] // no redirect whitelist
-const defaultRoutePath = '/m/product'
-const loginRoutePath = '/m/login'
+const defaultRoutePath = '/home'
+const loginRoutePath = '/login'
 
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar

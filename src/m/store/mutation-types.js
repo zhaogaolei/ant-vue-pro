@@ -1,0 +1,1 @@
+export const SET_ACTIVE_STATUS = 'SET_ACTIVE_STATUS'

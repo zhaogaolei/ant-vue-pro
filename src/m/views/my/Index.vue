@@ -1,0 +1,67 @@
+<template>
+  <div class="about">
+    <div class="aboutTitle">
+      <div class="userName">用户名</div>
+      <div class="userTel">138****6666</div>
+    </div>
+    <div class="aboutMe">
+      <van-cell title="关于我们" is-link to="/my/about" size="large"/>
+    </div>
+    <div class="logOut">
+      <van-button plain hairline type="danger" @click="logOut">退出登录</van-button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'My',
+  methods: {
+    logOut () {
+      window.localStorage.removeItem('TOKEN')
+      this.$router.push({ path: '/login', replace: true })
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.about{
+  .aboutTitle{
+    height: 84px;
+    background: #ffffff;
+    padding:21px 0;
+    text-align:center;
+    .userName{
+      height: 20px;
+      font-size: 18px;
+      font-family: PingFangSC;
+      color: #323233;
+      line-height: 20px;
+      letter-spacing: 0px;
+    }
+    .userTel{
+      height: 20px;
+      font-size: 14px;
+      font-family: PingFangSC;
+      color: #323233;
+      line-height: 20px;
+      letter-spacing: 0px;
+      padding-top: 2px;
+    }
+  }
+  .aboutMe{
+    margin-top: 12px;
+  }
+  .logOut{
+    text-align: center;
+    position: absolute;
+    bottom: 96px;
+    width: 100%;
+    button{
+      width: 311px;
+    }
+  }
+}
+
+</style>

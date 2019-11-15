@@ -66,6 +66,7 @@ const vueConfig = {
   filenameHashing: true,
   pages: page,
   configureWebpack: {
+    devtool: 'source-map', // 配置后，开发环境方便调试
     // webpack plugins
     plugins: [
       // Ignore all locale files of moment.js
@@ -136,7 +137,7 @@ const vueConfig = {
 
   // disable source map in production
   productionSourceMap: false,
-  lintOnSave: undefined,
+  lintOnSave: isProd(),
   // babel-loader no-ignore node_modules/*
   transpileDependencies: []
 }
