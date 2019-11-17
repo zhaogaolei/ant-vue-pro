@@ -34,15 +34,14 @@ import mineIconActive from '../../assets/m/image/mine@1x.png'
 import minehomeIconActiveIcon from '../../assets/m/image/mine@1x-2.png'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { SET_ACTIVE_STATUS } from '../store/mutation-types'
-import localStorage from '../utils/localStorage'
+import { local } from '../utils/storage'
 import { ContactsOutline } from '@ant-design/icons/lib/dist'
-const { getItem } = localStorage
-console.log(getItem(SET_ACTIVE_STATUS))
+
 export default {
   name: 'TabLayoutView',
   data () {
     return {
-      active: 0,
+      active: Number(local.getItem(SET_ACTIVE_STATUS)),
       icon: {
         homeActive: homeIconActive,
         homeInactive: homeIconInActive,
@@ -60,8 +59,15 @@ export default {
   },
   methods: {
     switchTab (active) {
-      console.log(this.active)
       this.$store.dispatch('SwitchTab', active)
+    }
+  },
+  created () {
+    const { current } = this.$router.history
+    if (current.path === '/home') {
+      this.active = 0
+    } else {
+      this.active = 1
     }
   }
 }

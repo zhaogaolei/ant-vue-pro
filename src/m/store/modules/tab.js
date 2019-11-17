@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { SET_ACTIVE_STATUS } from '../mutation-types'
-import localStorage from '../../utils/localStorage'
-const { setItem } = localStorage
+import { local } from '../../utils/storage'
+
 const tab = {
   state: {
     activeStatus: 0
@@ -9,9 +9,8 @@ const tab = {
 
   mutations: {
     [SET_ACTIVE_STATUS]: (state, activeStatus) => {
-      console.log(state, activeStatus)
-      setItem(SET_ACTIVE_STATUS, activeStatus)
-      state.activeStatus = activeStatus
+      local.setItem(SET_ACTIVE_STATUS, activeStatus)
+      // state.activeStatus = activeStatus
     }
   },
 

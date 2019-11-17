@@ -14,11 +14,13 @@
 </template>
 
 <script>
+import { SET_ACTIVE_STATUS } from '../../store/mutation-types'
 export default {
   name: 'My',
   methods: {
     logOut () {
       window.localStorage.removeItem('TOKEN')
+      window.localStorage.removeItem(SET_ACTIVE_STATUS)
       this.$router.push({ path: '/login', replace: true })
     }
   }
