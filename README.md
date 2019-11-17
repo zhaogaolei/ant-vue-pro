@@ -18,7 +18,7 @@
 
 - 拉取项目代码
 ```bash
-git clone https://github.com/sendya/ant-design-pro-vue.git
+git clone https://github.com/zhaogaolei/lz-ant-vant-vue-pro.git
 cd ant-design-pro-vue
 ```
 
