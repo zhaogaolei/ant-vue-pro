@@ -5,6 +5,7 @@ import store from './store'
 import '../core/lazy_use'
 
 import './permission' // permission control
+import '../assets/m/common.less'
 // 引入字体
 import '../assets/iconfont/iconfont.css'
 

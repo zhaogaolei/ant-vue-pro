@@ -20,7 +20,11 @@ import {
   Tabs,
   Toast,
   Grid, GridItem,
-  Cell
+  Cell,
+  Icon,
+  Panel,
+  List,
+  ActionSheet 
 } from 'vant'
 Vue.use(DatetimePicker)
 Vue.use(Popup)
@@ -32,6 +36,8 @@ Vue.use(Button).use(CellGroup)
 .use(Grid)
 .use(GridItem)
 .use(Cell)
+.use(Icon)
+.use(Panel).use(List).use(ActionSheet)
 
 
 Vue.prototype.$toast = Toast

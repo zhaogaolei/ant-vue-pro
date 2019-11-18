@@ -35,7 +35,6 @@ import minehomeIconActiveIcon from '../../assets/m/image/mine@1x-2.png'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { SET_ACTIVE_STATUS } from '../store/mutation-types'
 import { local } from '../utils/storage'
-import { ContactsOutline } from '@ant-design/icons/lib/dist'
 
 export default {
   name: 'TabLayoutView',
