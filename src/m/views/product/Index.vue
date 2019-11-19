@@ -9,7 +9,6 @@
       <van-icon class="searchIcon" name="todo-list-o" @click="onShowActionSheet"/>
     </div>
     <van-tabs
-      class="vantabs"
       :border="false"
       :line-width="40"
       :line-height="3"
@@ -17,12 +16,17 @@
       title-active-color="#323233"
       title-inactive-color="#969799"
     >
-      <van-tab title="全部"><product-list :productList="productList"></product-list></van-tab>
-      <van-tab title="待提审"><product-list :productList="productList"></product-list></van-tab>
-      <van-tab title="待审核"><product-list :productList="productList"></product-list></van-tab>
-      <van-tab title="通过"><product-list :productList="productList"></product-list></van-tab>
-      <van-tab title="驳回"><product-list :productList="productList"></product-list></van-tab>
+      <van-tab title="全部"></van-tab>
+      <van-tab title="待提审"></van-tab>
+      <van-tab title="待审核"></van-tab>
+      <van-tab title="通过"></van-tab>
+      <van-tab title="驳回"></van-tab>
     </van-tabs>
+    <product-list class="vantabs" :productList="productList"></product-list>
+    <!-- <product-list1 class="vantabs" :productList="productList"></product-list1>
+    <product-list2 class="vantabs" :productList="productList"></product-list2>
+    <product-list3 class="vantabs" :productList="productList"></product-list3>
+    <product-list4 class="vantabs" :productList="productList"></product-list4> -->
 
     <van-action-sheet
       v-model="show"
@@ -38,10 +42,18 @@
 
 <script>
 import ProductList from '../../components/ProductList'
+import ProductList1 from '../../components/ProductList'
+import ProductList2 from '../../components/ProductList'
+import ProductList3 from '../../components/ProductList'
+import ProductList4 from '../../components/ProductList'
 export default {
   name: 'MProduct',
   components: {
-    ProductList
+    ProductList,
+    ProductList1,
+    ProductList2,
+    ProductList3,
+    ProductList4
   },
   data () {
     return {
@@ -89,19 +101,21 @@ export default {
   }
 }
 .search{
-  display: flex;
-  align-items: center;
   height:64px;
   padding: 10px 16px;
   background: #ffffff;
   .searchInput{
     background: #F7F8FA;
+    margin-right: 42px;
+    width: auto;
     height: 34px;
     padding: 7px 16px;
   }
   .searchIcon{
     margin-left: 18px;
     font-size: 26px;
+    top: -30px;
+    float: right;
   }
 }
 </style>
