@@ -6,16 +6,18 @@
       active-color="#ea5144"
       inactive-color="#323233">
       <van-tabbar-item to="/home" @click="switchTab(active)">
-        <span>主页</span>
+        <span class="tagName">主页</span>
         <img
+          class="iconImg"
           slot="icon"
           slot-scope="props"
           :src="props.active ? icon.homeActive : icon.homeInactive"
         >
       </van-tabbar-item>
       <van-tabbar-item to="/my" @click="switchTab(active)">
-        <span>我的</span>
+        <span class="tagName">我的</span>
         <img
+          class="iconImg"
           slot="icon"
           slot-scope="props"
           :src="props.active ? icon.mineActive : icon.mineInactive"
@@ -72,6 +74,15 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang='less'>
+.iconImg{
+  margin-top: 4px;
+  width: 34px;
+  height: 34px;
+}
+.tagName{
+  font-size: 10px;
+  position: relative;
+  top: -5px;
+}
 </style>

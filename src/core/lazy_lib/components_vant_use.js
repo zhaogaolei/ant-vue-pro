@@ -24,7 +24,15 @@ import {
   Icon,
   Panel,
   List,
-  ActionSheet 
+  ActionSheet,
+  Image,
+  Switch,
+  Sticky,
+  ImagePreview,
+  Uploader,
+  SwitchCell,
+  Dialog,
+  Area
 } from 'vant'
 Vue.use(DatetimePicker)
 Vue.use(Popup)
@@ -38,6 +46,10 @@ Vue.use(Button).use(CellGroup)
 .use(Cell)
 .use(Icon)
 .use(Panel).use(List).use(ActionSheet)
+.use(Image).use(Switch).use(Sticky).use(ImagePreview)
+.use(Uploader).use(SwitchCell)
+.use(Dialog).use(Area)
 
 
 Vue.prototype.$toast = Toast
+Vue.prototype.$dialog = Dialog

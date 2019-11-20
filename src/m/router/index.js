@@ -47,6 +47,70 @@ export default new Router({
       component: () => import('../views/product/Index.vue')
     },
     {
+      path: '/productadd',
+      name: 'mProductAdd',
+      meta: {
+        title: '添加商品'
+      },
+      component: () => import('../views/product/ProductAdd.vue')
+    },
+    {
+      path: '/productname',
+      name: 'mProductName',
+      meta: {
+        title: '选择或新增商品'
+      },
+      component: () => import('../views/product/ProductName.vue')
+    },
+    {
+      path: '/productpic',
+      name: 'mProductPic',
+      meta: {
+        title: '编辑图片'
+      },
+      component: () => import('../views/product/ProductPicture.vue')
+    },
+    {
+      path: '/productaddress',
+      name: 'mProductAddress',
+      meta: {
+        title: '添加地址'
+      },
+      component: () => import('../views/product/ProductAddress.vue')
+    },
+    {
+      path: '/supply',
+      name: 'mSupply',
+      meta: {
+        title: '供应商'
+      },
+      component: () => import('../views/product/supply/List.vue')
+    },
+    {
+      path: '/supplyedit',
+      name: 'mSupplyEdit',
+      meta: {
+        title: '编辑供应商'
+      },
+      component: () => import('../views/product/supply/Edit.vue')
+    },
+    {
+      path: '/supplyview',
+      name: 'mSupplyView',
+      meta: {
+        title: '查看供应商'
+      },
+      component: () => import('../views/product/supply/View.vue')
+    },
+    {
+      path: '/productsku',
+      name: 'mProductSku',
+      meta: {
+        title: '编辑规格'
+      },
+      component: () => import('../views/product/sku/Index.vue')
+    },
+    {
       path: '/supply',
       name: 'mSupply',
       meta: {

@@ -41,10 +41,15 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/no-duplicates
 import ProductList from '../../components/ProductList'
+// eslint-disable-next-line import/no-duplicates
 import ProductList1 from '../../components/ProductList'
+// eslint-disable-next-line import/no-duplicates
 import ProductList2 from '../../components/ProductList'
+// eslint-disable-next-line import/no-duplicates
 import ProductList3 from '../../components/ProductList'
+// eslint-disable-next-line import/no-duplicates
 import ProductList4 from '../../components/ProductList'
 export default {
   name: 'MProduct',
@@ -81,6 +86,7 @@ export default {
     onSelect (data) {
       console.log(data.key, data.name)
       this.$toast('选中了：' + data.name)
+      this.$router.push({ path: '/productadd' })
     },
     onCancel () {
       this.show = false
