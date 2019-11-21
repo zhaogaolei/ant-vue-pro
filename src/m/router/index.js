@@ -55,12 +55,12 @@ export default new Router({
       component: () => import('../views/product/ProductAdd.vue')
     },
     {
-      path: '/productname',
-      name: 'mProductName',
+      path: '/productbasic',
+      name: 'mProductBasic',
       meta: {
         title: '选择或新增商品'
       },
-      component: () => import('../views/product/ProductName.vue')
+      component: () => import('../views/product/BasicProduct.vue')
     },
     {
       path: '/productpic',
@@ -84,7 +84,7 @@ export default new Router({
       meta: {
         title: '供应商'
       },
-      component: () => import('../views/product/supply/List.vue')
+      component: () => import('../views/supply/List.vue')
     },
     {
       path: '/supplyedit',
@@ -92,7 +92,7 @@ export default new Router({
       meta: {
         title: '编辑供应商'
       },
-      component: () => import('../views/product/supply/Edit.vue')
+      component: () => import('../views/supply/Edit.vue')
     },
     {
       path: '/supplyview',
@@ -100,7 +100,7 @@ export default new Router({
       meta: {
         title: '查看供应商'
       },
-      component: () => import('../views/product/supply/View.vue')
+      component: () => import('../views/supply/View.vue')
     },
     {
       path: '/productsku',
@@ -109,14 +109,6 @@ export default new Router({
         title: '编辑规格'
       },
       component: () => import('../views/product/sku/Index.vue')
-    },
-    {
-      path: '/supply',
-      name: 'mSupply',
-      meta: {
-        title: '供应商管理'
-      },
-      component: () => import('../views/supply/Index.vue')
     },
     {
       path: '/my/about',

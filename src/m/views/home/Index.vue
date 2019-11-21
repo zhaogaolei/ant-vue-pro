@@ -7,7 +7,7 @@
         :to="item.to"
       >
         <div slot="icon">
-          <span class="iconfont iconshangpinguanli picon"></span>
+          <span class="iconfont icon-shangpinguanli picon"></span>
         </div>
         <div slot="text" class="pname">{{ item.text }}</div>
       </van-grid-item>

@@ -32,7 +32,8 @@ import {
   Uploader,
   SwitchCell,
   Dialog,
-  Area
+  Area,
+  Row, Col
 } from 'vant'
 Vue.use(DatetimePicker)
 Vue.use(Popup)
@@ -43,7 +44,7 @@ Vue.use(Button).use(CellGroup)
 .use(Toast)
 .use(Grid)
 .use(GridItem)
-.use(Cell)
+.use(Cell).use(Row).use(Col)
 .use(Icon)
 .use(Panel).use(List).use(ActionSheet)
 .use(Image).use(Switch).use(Sticky).use(ImagePreview)

@@ -61,8 +61,8 @@ export default {
    }
 }
  .noImage{
-    width: 84px;
-    height: 84px;
+    width: 80px;
+    height: 80px;
     border-radius: 4px;
     background: #E9EAEC;
     font-size: 37px;

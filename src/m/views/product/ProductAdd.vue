@@ -8,7 +8,7 @@
       size="large"
       title="名称"
       is-link
-      to="productname">
+      to="productbasic">
       <span slot="default" class="rightName">请选择名称</span>
     </van-cell>
     <!-- 图片 -->
@@ -30,7 +30,7 @@
     </div>
     <!-- 商家维护 -->
     <div class="marginBottom">
-      <van-switch-cell v-model="checked" cell-size="large" title="是否开启商家地址维护" active-color="#ff4444"/>
+      <van-switch-cell v-model="checked" :border="false" cell-size="large" title="是否开启商家地址维护" active-color="#ff4444"/>
       <van-cell-group v-if="!checked">
         <van-cell title="杭州分店" size="large" label="浙江省杭州市江干区九堡镇人民西路100号" is-link to="productaddress">
           <van-icon slot="right-icon" name="edit" class="editIcon"/>
@@ -139,7 +139,7 @@ export default {
 .picture{
   .pictureContent{
     height: 116px;
-    padding: 16px 0 16px 16px;
+    padding: 16px 12px 16px 16px;
     background: #ffffff;
     white-space: nowrap;
     overflow-y: hidden;
