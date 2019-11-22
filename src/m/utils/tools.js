@@ -1,3 +1,8 @@
+/**
+ * 工具函数
+ * @param {*} date
+ */
+
 const formatDate = (date) => {
   const y = date.getFullYear()
   const m = date.getMonth() + 1

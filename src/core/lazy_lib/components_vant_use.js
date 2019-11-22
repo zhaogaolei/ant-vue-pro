@@ -28,12 +28,14 @@ import {
   Image,
   Switch,
   Sticky,
+  Search,
   ImagePreview,
   Uploader,
   SwitchCell,
   Dialog,
   Area,
-  Row, Col
+  Row, Col,
+  Checkbox, CheckboxGroup
 } from 'vant'
 Vue.use(DatetimePicker)
 Vue.use(Popup)
@@ -45,11 +47,12 @@ Vue.use(Button).use(CellGroup)
 .use(Grid)
 .use(GridItem)
 .use(Cell).use(Row).use(Col)
-.use(Icon)
+.use(Icon).use(Search)
 .use(Panel).use(List).use(ActionSheet)
 .use(Image).use(Switch).use(Sticky).use(ImagePreview)
 .use(Uploader).use(SwitchCell)
 .use(Dialog).use(Area)
+.use(Checkbox).use(CheckboxGroup)
 
 
 Vue.prototype.$toast = Toast

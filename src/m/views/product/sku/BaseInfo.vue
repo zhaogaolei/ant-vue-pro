@@ -13,7 +13,7 @@
       />
     </van-cell-group>
     <van-cell-group class="type">
-      <van-cell size="large" title="类型" :value="selectedType.value||'请选择'" is-link @click="onSelectType"/>
+      <van-cell size="large" title="类型" :value="selectedType.value||'请选择'" is-link @click="onShowType"/>
     </van-cell-group>
 
     <van-cell-group>
@@ -35,28 +35,22 @@
           @click="previewImg(index)"/>
       </div>
     </div>
-
-    <van-popup
-      v-model="isShowType"
-      closeable
-      safe-area-inset-bottom
-      position="bottom"
-      :style="{ height: '66%' }"
-    >
-      <div class="popupTitle">选择类型</div>
-      <van-cell-group>
-        <van-cell size="large" v-for="(item,index) in typeList" :key="index" @click="afterSelectType(item)">
-          <van-icon slot="icon" class="listSelectIcon" name="success" v-if="item.value===selectedType.value"/>
-          <div slot="title">{{ item.label }}</div>
-        </van-cell>
-      </van-cell-group>
-    </van-popup>
+    <!-- 类型选择popup -->
+    <popup-list
+      title="选择类型"
+      :height="66"
+      :dataList="typeList"
+      :isShowPopup="isShowType"
+      :selectedItem="selectedType"
+      @callBackCancel="onShowType"
+      @callBackSelect="onSelectType"/>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import { ImagePreview } from 'vant'
+import PopupList from '../../../components/PopupList'
 Vue.use(ImagePreview)
 const images = [
   'https://img.yzcdn.cn/vant/cat.jpeg',
@@ -69,6 +63,8 @@ const images = [
   'https://img.yzcdn.cn/vant/cat.jpeg'
 ]
 export default {
+  name: 'BaseInfo',
+  components: { PopupList },
   data () {
     return {
       isShowType: false,
@@ -90,14 +86,15 @@ export default {
     }
   },
   methods: {
-    onSelectType () {
-      this.isShowType = true
+    // 类型选择
+    onShowType () {
+      this.isShowType = !this.isShowType
     },
-    afterSelectType (item) {
-      console.log(item)
+    onSelectType (item) {
       this.selectedType = item
       this.isShowType = false
     },
+    // 预览图片
     previewImg (index) {
       ImagePreview({
         images: this.images,
@@ -114,7 +111,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .baseInfo{
-  margin-top: 25px;
+  margin-top: 12px;
   margin-bottom: 66px;
   .type{
     margin: 12px 0 ;
@@ -147,6 +144,10 @@ export default {
     }
   }
   .popupTitle{
+    position: fixed;
+    background: #ffffff;
+    z-index: 999;
+    width: 100%;
     height: 54px;
     font-size: 16px;
     font-weight: 800;
@@ -154,6 +155,13 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    .close{
+      position: absolute;
+      right: 20px;
+    }
+  }
+  .popupListItem{
+    margin-top: 54px;
   }
   .listSelectIcon{
     color: #FF4444;

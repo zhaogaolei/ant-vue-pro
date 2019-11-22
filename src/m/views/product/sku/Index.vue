@@ -15,7 +15,7 @@
       <van-tab title="购买"><sku-purchase></sku-purchase></van-tab>
     </van-tabs>
 
-    <!-- 底部按钮 -->
+    <!-- 底部按钮 编辑只有[删除+保存]  新增只有[保存]-->
     <foot class="footBtn">
       <van-button plain color="#ff4444">删除</van-button>
       <van-button color="#ff4444">保存</van-button>
@@ -34,7 +34,7 @@ export default {
   components: { SkuBaseInfo, SkuSell, SkuContent, SkuPurchase, Foot },
   data () {
     return {
-      active: 2 // 默认选中那个tab标签
+      active: 0 // 默认选中那个tab标签
     }
   },
   methods: {
@@ -53,5 +53,4 @@ export default {
     }
  }
 }
-
 </style>

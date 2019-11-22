@@ -48,7 +48,7 @@
       <van-cell title="供应商" size="large" is-link to="supply">
         <span slot="default" class="rightName">请选择</span>
       </van-cell>
-      <van-cell title="售卖区域" size="large" is-link>
+      <van-cell title="售卖区域" size="large" is-link @click="isShowSellArea=true">
         <span slot="default" class="rightName">请选择</span>
       </van-cell>
     </van-cell-group>
@@ -70,6 +70,17 @@
     <foot>
       <van-button class="saveBtn" color="#FF4444">保存</van-button>
     </foot>
+
+    <!-- 售卖区域 popup -->
+    <popup-list
+      title="选择售卖区域"
+      :isShowSearch="true"
+      :height="88"
+      :dataList="sellAreaList"
+      :isShowPopup="isShowSellArea"
+      :selectedItem="selectedSellArea"
+      @callBackCancel="onShowSellArea"
+      @callBackSelect="onSelectSellArea"/>
   </div>
 </template>
 
@@ -77,6 +88,7 @@
 import Vue from 'vue'
 import { ImagePreview } from 'vant'
 import Foot from '../../components/Foot'
+import PopupList from '../../components/PopupList'
 Vue.use(ImagePreview)
 const images = [
   'https://img.yzcdn.cn/vant/cat.jpeg',
@@ -90,14 +102,39 @@ const images = [
 ]
 export default {
   name: 'ProductAdd',
-  components: { Foot },
+  components: { PopupList, Foot },
   data () {
     return {
+      isShowSellArea: false,
+      sellAreaList: [
+        { label: '江浙沪', value: '江浙沪' },
+        { label: '上海', value: '上海' },
+        { label: '广州', value: '广州' },
+        { label: '深圳', value: '深圳' },
+        { label: '杭州', value: '杭州' },
+        { label: '苏州', value: '苏州' },
+        { label: '无锡', value: '无锡' },
+        { label: '常州', value: '常州' },
+        { label: '合肥', value: '合肥' },
+        { label: '郑州', value: '郑州' },
+        { label: '南京', value: '南京' },
+        { label: '成都', value: '成都' },
+        { label: '长白山', value: '长白山' },
+        { label: '武夷山', value: '武夷山' }
+      ],
+      selectedSellArea: {},
       checked: false,
       images: []
     }
   },
   methods: {
+    onShowSellArea () {
+      this.isShowSellArea = !this.isShowSellArea
+    },
+    onSelectSellArea (item) {
+      this.selectedSellArea = item
+      this.isShowSellArea = false
+    },
     previewImg (index) {
       ImagePreview({
         images: this.images,
