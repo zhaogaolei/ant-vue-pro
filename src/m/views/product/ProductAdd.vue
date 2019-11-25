@@ -68,7 +68,8 @@
     </div>
     <!-- 底部保存 -->
     <foot>
-      <van-button class="saveBtn" color="#FF4444">保存</van-button>
+
+      <van-button class="saveBtn" color="#FF4444" @click="onSave">保存</van-button>
     </foot>
 
     <!-- 售卖区域 popup -->
@@ -89,6 +90,7 @@ import Vue from 'vue'
 import { ImagePreview } from 'vant'
 import Foot from '../../components/Foot'
 import PopupList from '../../components/PopupList'
+import toast from '../../utils/toast'
 Vue.use(ImagePreview)
 const images = [
   'https://img.yzcdn.cn/vant/cat.jpeg',
@@ -100,36 +102,51 @@ const images = [
   'https://img.yzcdn.cn/vant/cat.jpeg',
   'https://img.yzcdn.cn/vant/cat.jpeg'
 ]
+let tmp = []
 export default {
   name: 'ProductAdd',
   components: { PopupList, Foot },
   data () {
     return {
       isShowSellArea: false,
-      sellAreaList: [
-        { label: '江浙沪', value: '江浙沪' },
-        { label: '上海', value: '上海' },
-        { label: '广州', value: '广州' },
-        { label: '深圳', value: '深圳' },
-        { label: '杭州', value: '杭州' },
-        { label: '苏州', value: '苏州' },
-        { label: '无锡', value: '无锡' },
-        { label: '常州', value: '常州' },
-        { label: '合肥', value: '合肥' },
-        { label: '郑州', value: '郑州' },
-        { label: '南京', value: '南京' },
-        { label: '成都', value: '成都' },
-        { label: '长白山', value: '长白山' },
-        { label: '武夷山', value: '武夷山' }
-      ],
+      sellAreaList: [],
       selectedSellArea: {},
       checked: false,
       images: []
     }
   },
+  mounted () {
+    this.sellAreaList = [
+      { label: '江浙沪', value: '江浙沪' },
+      { label: '上海', value: '上海' },
+      { label: '广州', value: '广州' },
+      { label: '深圳', value: '深圳' },
+      { label: '杭州', value: '杭州' },
+      { label: '苏州', value: '苏州' },
+      { label: '无锡', value: '无锡' },
+      { label: '常州', value: '常州' },
+      { label: '合肥', value: '合肥' },
+      { label: '郑州', value: '郑州' },
+      { label: '南京', value: '南京' },
+      { label: '成都', value: '成都' },
+      { label: '长白山', value: '长白山' },
+      { label: '武夷山', value: '武夷山' }
+    ]
+    tmp = [...this.sellAreaList]
+    console.log(tmp)
+  },
   methods: {
     onShowSellArea () {
       this.isShowSellArea = !this.isShowSellArea
+    },
+    onSearchSellArea (area) {
+      // search
+      console.log('=========', area, tmp.filter((f, i) => f.value === area))
+      if (area === '') {
+        this.sellAreaList = tmp
+      } else {
+        this.sellAreaList = tmp.filter((f, i) => f.value === area)
+      }
     },
     onSelectSellArea (item) {
       this.selectedSellArea = item
@@ -145,6 +162,17 @@ export default {
           console.log('关闭预览', obj)
         }
       })
+    },
+    // 测试用
+    onToastClose () {
+      toast.hide()
+    },
+    onSave () {
+      console.log(toast)
+      toast.loading('保存中...')
+      // toast.success('保存成功')
+      // toast.fail('保存失败')
+      // toast.info('长长长长长长长长长长长长长长长长长长长信息提示会换行')
     }
   }
 }

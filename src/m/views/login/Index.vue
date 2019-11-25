@@ -59,6 +59,17 @@ export default {
       password: ''
     }
   },
+  mounted () {
+    // eslint-disable-next-line no-undef
+    alert(123)
+    var _data = {
+      'method': 'openFullWindow',
+      'param': 'http://www.zmjiudian.com',
+      'success': '',
+      'fail': ''
+    }
+    window.webkit.messageHandlers.whotel.postMessage(_data)
+  },
   methods: {
     ...mapActions(['Login', 'Logout']),
     onClick (name, title) {

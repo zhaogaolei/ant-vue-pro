@@ -1,6 +1,6 @@
 <template>
   <van-popup
-    v-model="isShowPopup"
+    v-model="isShow"
     safe-area-inset-bottom
     :close-on-popstate="true"
     :close-on-click-overlay="false"
@@ -14,7 +14,7 @@
       </div>
     </div>
     <van-cell-group class="popupListItem">
-      <van-cell size="large" v-for="(item,index) in dataList" :key="index" @click="onSelect(item)">
+      <van-cell size="large" v-for="(item,index) in list" :key="index" @click="onSelect(item)">
         <van-icon slot="icon" class="listSelectIcon" name="success" v-if="item.value===selectedItem.value"/>
         <div slot="title">{{ item.label }}</div>
       </van-cell>
@@ -23,11 +23,24 @@
 </template>
 
 <script>
+let tmp = []
 export default {
   name: 'PopupList',
   data () {
     return {
-      searchMsg: ''
+      searchMsg: '',
+      isShow: this.isShowPopup,
+      list: this.dataList
+    }
+  },
+  watch: {
+    isShowPopup (value) {
+      console.log(value)
+      this.isShow = value
+    },
+    dataList (list) {
+      console.log(list)
+      this.list = list
     }
   },
   props: {
@@ -57,6 +70,9 @@ export default {
       default: () => {}
     }
   },
+  mounted () {
+    tmp = this.list
+  },
   computed: {
 
   },
@@ -66,11 +82,18 @@ export default {
       this.$emit('callBackSelect', item)
     },
     onCancel () {
-      console.log('callBackCancel')
       this.$emit('callBackCancel')
     },
     onSearchChange () {
-      console.log(this.dataList, this.searchMsg)
+      // search
+      console.log('=========', this.searchMsg, tmp.filter((f, i) => f.value === this.searchMsg))
+      if (this.searchMsg === '') {
+        this.sellAreaList = tmp
+      } else {
+        this.list = tmp.filter((f, i) => f.value === this.searchMsg)
+      }
+
+      // this.$emit('callBackSearch', this.searchMsg)
     }
   }
 }
