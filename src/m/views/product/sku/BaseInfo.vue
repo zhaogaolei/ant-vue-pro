@@ -111,8 +111,8 @@ export default {
 </script>
 <style lang="less" scoped>
 .baseInfo{
-  margin-top: 12px;
-  margin-bottom: 66px;
+  padding-top: 12px;
+  padding-bottom: 66px;
   .type{
     margin: 12px 0 ;
   }

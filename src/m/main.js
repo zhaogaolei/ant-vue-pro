@@ -11,6 +11,10 @@ import '../assets/iconfont/iconfont.css'
 
 import '../utils/setRem'
 
+import Vconsole from 'vconsole'
+const vConsole = new Vconsole()
+Vue.use(vConsole)
+
 Vue.config.productionTip = false
 new Vue({
   router,

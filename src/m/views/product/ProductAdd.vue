@@ -68,7 +68,6 @@
     </div>
     <!-- 底部保存 -->
     <foot>
-
       <van-button class="saveBtn" color="#FF4444" @click="onSave">保存</van-button>
     </foot>
 
@@ -180,7 +179,7 @@ export default {
 
 <style lang="less" scoped>
 .productBody{
-  margin-bottom:66px;
+  padding-bottom:66px;
 }
 .headerTitle{
   height: 50px;
