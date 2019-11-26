@@ -14,6 +14,10 @@ import gourl from './utils/gourl'
 import Vconsole from 'vconsole'
 const vConsole = new Vconsole()
 
+import Vconsole from 'vconsole'
+const vConsole = new Vconsole()
+Vue.use(vConsole)
+
 Vue.config.productionTip = false
 Vue.prototype.$gourl = gourl
 new Vue({
