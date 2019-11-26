@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { BlankLayout, TabLayout } from '../layouts'
+import zmDevice from '../utils/native'
 
 Vue.use(Router)
 
@@ -18,7 +19,7 @@ export default new Router({
       path: '/',
       name: 'm',
       redirect: '/home',
-      component: TabLayout,
+      component: zmDevice.isZmApp ? TabLayout : TabLayout, // 如果是app环境不显示tab
       children: [
         {
           path: '/home',

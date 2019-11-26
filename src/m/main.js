@@ -8,10 +8,14 @@ import './permission' // permission control
 import '../assets/m/common.less'
 // 引入字体
 import '../assets/iconfont/iconfont.css'
-
 import '../utils/setRem'
+import gourl from './utils/gourl'
+
+import Vconsole from 'vconsole'
+const vConsole = new Vconsole()
 
 Vue.config.productionTip = false
+Vue.prototype.$gourl = gourl
 new Vue({
   router,
   store,

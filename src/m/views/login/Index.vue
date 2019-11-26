@@ -49,6 +49,9 @@
 import md5 from 'md5'
 import { mapActions } from 'vuex'
 import zmLogo from '@/assets/m/image/Mask.svg'
+import zmDevice from '../../utils/native'
+import constants from '../../constants'
+const { nativeApi } = constants
 
 export default {
   name: 'MLogin',
@@ -61,14 +64,7 @@ export default {
   },
   mounted () {
     // eslint-disable-next-line no-undef
-    alert(123)
-    var _data = {
-      'method': 'openFullWindow',
-      'param': 'http://www.zmjiudian.com',
-      'success': '',
-      'fail': ''
-    }
-    window.webkit.messageHandlers.whotel.postMessage(_data)
+    console.log(navigator.userAgent)
   },
   methods: {
     ...mapActions(['Login', 'Logout']),
@@ -84,11 +80,16 @@ export default {
     loginSuccess (res) {
       console.log(res)
       // 处理重定向
-      const redirect = this.$router.currentRoute.query.redirect
-      if (this.$router.currentRoute.query.redirect) {
-        this.$router.push(redirect)
+      if (zmDevice.isZmApp) {
+        zmDevice.postMessageToApp(nativeApi.refreshAllView, '', '', '')
+        zmDevice.postMessageToApp(nativeApi.closeFullWindow, '', '', '')
       } else {
-        this.$router.push({ path: '/home' })
+        const redirect = this.$router.currentRoute.query.redirect
+        if (this.$router.currentRoute.query.redirect) {
+          this.$router.push(redirect)
+        } else {
+          this.$router.push({ path: '/home' })
+        }
       }
     },
     requestFailed (err) {

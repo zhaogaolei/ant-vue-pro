@@ -5,7 +5,7 @@
       <div class="userTel">138****6666</div>
     </div>
     <div class="aboutMe">
-      <van-cell title="关于我们" is-link to="/my/about" size="large"/>
+      <van-cell title="关于我们" is-link @click="onAboutMe" size="large"/>
     </div>
     <div class="logOut">
       <van-button plain hairline type="danger" @click="logOut">退出登录</van-button>
@@ -15,13 +15,23 @@
 
 <script>
 import { SET_ACTIVE_STATUS } from '../../store/mutation-types'
+import zmDevice from '../../utils/native'
+import mixin from '../../nativeMixin'
 export default {
   name: 'My',
+  mixins: [ mixin ],
   methods: {
+    onAboutMe () {
+      this.$gourl('/my/about', this.$router)
+    },
     logOut () {
       window.localStorage.removeItem('TOKEN')
       window.localStorage.removeItem(SET_ACTIVE_STATUS)
-      this.$router.push({ path: '/login', replace: true })
+      if (zmDevice.isZmApp) {
+        this.openLogin()
+      } else {
+        this.$router.push({ path: '/login', replace: true })
+      }
     }
   }
 }

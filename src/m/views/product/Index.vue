@@ -51,6 +51,7 @@ import ProductList2 from '../../components/ProductList'
 import ProductList3 from '../../components/ProductList'
 // eslint-disable-next-line import/no-duplicates
 import ProductList4 from '../../components/ProductList'
+
 export default {
   name: 'MProduct',
   components: {
@@ -86,7 +87,8 @@ export default {
     onSelect (data) {
       console.log(data.key, data.name)
       this.$toast('选中了：' + data.name)
-      this.$router.push({ path: '/productadd' })
+      // this.$router.push({ path: '/productadd' })
+      this.$gourl('productadd', this.$router)
     },
     onCancel () {
       this.show = false

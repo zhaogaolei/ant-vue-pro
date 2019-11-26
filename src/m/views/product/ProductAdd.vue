@@ -180,7 +180,7 @@ export default {
 
 <style lang="less" scoped>
 .productBody{
-  margin-bottom:66px;
+  padding-bottom:66px;
 }
 .headerTitle{
   height: 50px;

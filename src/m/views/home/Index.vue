@@ -4,7 +4,7 @@
       <van-grid-item
         v-for="item in itemList"
         :key="item.text"
-        :to="item.to"
+        @click="onJump(item.to)"
       >
         <div slot="icon">
           <span class="iconfont icon-shangpinguanli picon"></span>
@@ -17,19 +17,22 @@
 
 <script>
 import productLogo from '@/assets/m/image/plogo.svg'
+import mixin from '../../nativeMixin'
 export default {
   name: 'Home',
-
+  mixins: [ mixin ],
   data () {
     return {
       itemList: [
-        { text: '商品管理', to: '/product', icon: productLogo }
-        // { text: '供应商管理', to: '/supply', icon: 'photo-o' }
+        { text: '商品管理', to: 'product', icon: productLogo }
       ]
     }
   },
-  mounted () {
-
+  mounted () {},
+  methods: {
+    onJump (to) {
+      this.$gourl(to, this.$router)
+    }
   }
 }
 </script>
