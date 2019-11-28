@@ -1,5 +1,8 @@
 <template>
   <div class="productBody">
+    <div class="topTips" v-if="!isAdd">
+      商品被驳回，原因是：【商品价格严重超出市场价格，建议修改后重新提交】
+    </div>
     <div class="headerTitle">基础信息</div>
     <!-- 商品名称 -->
     <van-cell
@@ -67,8 +70,21 @@
       </van-cell-group>
     </div>
     <!-- 底部保存 -->
-    <foot>
+    <foot v-if="isAdd">
       <van-button class="saveBtn" color="#FF4444" @click="onSave">保存</van-button>
+    </foot>
+    <foot v-if="!isAdd">
+      <div class="footIcon" @click="()=>{this.$gourl('log',this.$router)}">
+        <van-icon name="notes-o"/>
+        <span>日志</span>
+      </div>
+      <div
+        class="footIcon"
+        @click="preview">
+        <van-icon name="eye-o" />
+        <span>预览</span>
+      </div>
+      <van-button class="editSaveBtn" color="#FF4444" @click="onSave">保存</van-button>
     </foot>
 
     <!-- 售卖区域 popup -->
@@ -90,6 +106,11 @@ import { ImagePreview } from 'vant'
 import Foot from '../../components/Foot'
 import PopupList from '../../components/PopupList'
 import toast from '../../utils/toast'
+import { getParams } from '../../utils/tools'
+import { setDocumentTitle, domTitle } from '@/utils/domUtil'
+import { DialogNativeAppConfirm } from '../../utils/dialog'
+import constants from '../../constants'
+const { nativeApi } = constants
 Vue.use(ImagePreview)
 const images = [
   'https://img.yzcdn.cn/vant/cat.jpeg',
@@ -107,6 +128,7 @@ export default {
   components: { PopupList, Foot },
   data () {
     return {
+      isAdd: getParams().opType === 'add',
       isShowSellArea: false,
       sellAreaList: [],
       selectedSellArea: {},
@@ -115,6 +137,12 @@ export default {
     }
   },
   mounted () {
+    // app中 用户误触返回提示
+    DialogNativeAppConfirm(nativeApi.onbeforeback, '提示', '你编辑的内容还没有保存，返回将可能丢失，确定返回吗？')
+    console.log(getParams())
+    if (getParams().opType === 'edit') {
+      setDocumentTitle('编辑商品')
+    }
     this.sellAreaList = [
       { label: '江浙沪', value: '江浙沪' },
       { label: '上海', value: '上海' },
@@ -132,7 +160,6 @@ export default {
       { label: '武夷山', value: '武夷山' }
     ]
     tmp = [...this.sellAreaList]
-    console.log(tmp)
   },
   methods: {
     onShowSellArea () {
@@ -172,6 +199,10 @@ export default {
       // toast.success('保存成功')
       // toast.fail('保存失败')
       // toast.info('长长长长长长长长长长长长长长长长长长长信息提示会换行')
+    },
+    // 预览
+    preview () {
+      window.location.href = 'http://www.zmjiudian.com/coupon/product/25380?_newpage=1'
     }
   }
 }
@@ -180,6 +211,16 @@ export default {
 <style lang="less" scoped>
 .productBody{
   padding-bottom:66px;
+}
+.topTips{
+  background: #FFFBE8;
+  padding: 12px 16px;
+  height: 60px;
+  opacity: 1;
+  font-size: 14px;
+  color: #ED6A0C;
+  line-height: 18px;
+  letter-spacing: 0px;
 }
 .headerTitle{
   height: 50px;
@@ -247,6 +288,25 @@ export default {
 .saveBtn{
   height: 42px;
   width: 100%;
+}
+.footIcon{
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  i{
+    font-size: 22px;
+  }
+  span{
+    height: 17px;
+    opacity: 1;
+    font-size: 12px;
+    color: #323233;
+    line-height: 17px;
+    letter-spacing: 0px;
+  }
+}
+.editSaveBtn{
+  width: 70%;
 }
 
 </style>

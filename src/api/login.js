@@ -12,6 +12,16 @@ import { axios } from '@/utils/request'
  * @param parameter
  * @returns {*}
  */
+export function zmLogin (parameter) {
+  return axios({
+    url: '/connect/token',
+    method: 'post',
+    data: parameter,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }
+  })
+}
 export function login (parameter) {
   return axios({
     url: '/auth/login',

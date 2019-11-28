@@ -5,13 +5,14 @@
 import zmDevice from './utils/native'
 import constants from './constants'
 const { nativeApi } = constants
+const host = window.location.href.split('#')[0]
 const mixin = {
   beforeCreate () {},
   created () {
     if (zmDevice.isZmApp) {
       if (window.localStorage.getItem('TOKEN')) {
       } else {
-        zmDevice.postMessageToApp(nativeApi.openFullWindow, 'http://192.168.1.172:8000/m/#/login', '', '')
+        zmDevice.postMessageToApp(nativeApi.openFullWindow, host + '#/login', '', '')
       }
     }
   },
@@ -19,7 +20,7 @@ const mixin = {
   mounted () {},
   methods: {
     openLogin () {
-      zmDevice.postMessageToApp(nativeApi.openFullWindow, 'http://192.168.1.172:8000/m/#/login', '', '')
+      zmDevice.postMessageToApp(nativeApi.openFullWindow, host + '#/login', '', '')
     }
   }
 }

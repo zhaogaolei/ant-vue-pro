@@ -22,7 +22,7 @@ export default {
   mixins: [ mixin ],
   methods: {
     onAboutMe () {
-      this.$gourl('/my/about', this.$router)
+      this.$gourl('my/about', this.$router)
     },
     logOut () {
       window.localStorage.removeItem('TOKEN')

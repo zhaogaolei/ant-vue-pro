@@ -4,6 +4,7 @@
     safe-area-inset-bottom
     :close-on-popstate="true"
     :close-on-click-overlay="false"
+    @click-overlay="onCancel"
     position="bottom"
     :style="{ height: `${height}%` }"
   >
@@ -13,7 +14,7 @@
         <van-search v-model="searchMsg" placeholder="请输入搜索关键词" @input="onSearchChange()"/>
       </div>
     </div>
-    <van-cell-group class="popupListItem">
+    <van-cell-group :class="`${isShowSearch? 'popupListItemWithSearch':'popupListItem'}`">
       <van-cell size="large" v-for="(item,index) in list" :key="index" @click="onSelect(item)">
         <van-icon slot="icon" class="listSelectIcon" name="success" v-if="item.value===selectedItem.value"/>
         <div slot="title">{{ item.label }}</div>
@@ -23,19 +24,18 @@
 </template>
 
 <script>
-let tmp = []
 export default {
   name: 'PopupList',
   data () {
     return {
       searchMsg: '',
       isShow: this.isShowPopup,
-      list: this.dataList
+      list: this.dataList,
+      tmp: []
     }
   },
   watch: {
     isShowPopup (value) {
-      console.log(value)
       this.isShow = value
     },
     dataList (list) {
@@ -70,12 +70,11 @@ export default {
       default: () => {}
     }
   },
-  mounted () {
-    tmp = this.list
+  beforeUpdate () {
+    console.log('beforeUpdate')
+    this.tmp = this.dataList
   },
-  computed: {
-
-  },
+  computed: {},
   methods: {
     onSelect (item) {
       console.log('选中完毕', item)
@@ -86,11 +85,11 @@ export default {
     },
     onSearchChange () {
       // search
-      console.log('=========', this.searchMsg, tmp.filter((f, i) => f.value === this.searchMsg))
+      console.log('=========', this.searchMsg, this.tmp)
       if (this.searchMsg === '') {
-        this.sellAreaList = tmp
+        this.list = this.tmp
       } else {
-        this.list = tmp.filter((f, i) => f.value === this.searchMsg)
+        this.list = this.tmp.filter((f, i) => f.value.indexOf(this.searchMsg) > -1)
       }
 
       // this.$emit('callBackSearch', this.searchMsg)
@@ -124,6 +123,9 @@ export default {
   }
   .popupListItem{
     margin-top: 54px;
+  }
+  .popupListItemWithSearch{
+     margin-top: 108px;
   }
   .listSelectIcon{
     color: #FF4444;

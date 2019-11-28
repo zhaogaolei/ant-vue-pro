@@ -49,6 +49,7 @@
 import md5 from 'md5'
 import { mapActions } from 'vuex'
 import zmLogo from '@/assets/m/image/Mask.svg'
+import { zmLogin } from '@/api/login'
 import zmDevice from '../../utils/native'
 import constants from '../../constants'
 const { nativeApi } = constants
@@ -72,7 +73,20 @@ export default {
       // this.$toast(title)
     },
     onLogin () {
-      console.log(`用户名：${this.username},密码：${this.password}`)
+      // const postData = new FormData()
+      // postData.append('username', 'tom')
+      // postData.append('client_id', 'ZMJDBiz')
+      // postData.append('client_secret', 'zmjdClient01!')
+      // postData.append('grant_type', 'password')
+      // postData.append('password', '1q2w3E*')
+      // postData.append('scope', 'Author  Product Operation_Log')
+      // // postData.append('scope','Author  Product Supplier Operation_Log')
+      // zmLogin(postData).then(res => {
+      //   console.log(res)
+      // }).catch(error => {
+      //   console.log(error)
+      // })
+      // // console.log(`用户名：${this.username},密码：${this.password}`)
       window.localStorage.setItem('TOKEN', '测试路由拦截')
       // 登录操作成功
       this.loginSuccess({ code: 0, result: {} })

@@ -19,7 +19,7 @@ export default new Router({
       path: '/',
       name: 'm',
       redirect: '/home',
-      component: zmDevice.isZmApp ? TabLayout : TabLayout, // 如果是app环境不显示tab
+      component: zmDevice.isZmApp ? BlankLayout : TabLayout, // 如果是app环境不显示tab
       children: [
         {
           path: '/home',
@@ -116,6 +116,12 @@ export default new Router({
       name: 'mAbout',
       meta: { title: '关于我们' },
       component: () => import('../views/my/about/Index.vue')
+    },
+    {
+      path: '/log',
+      name: 'mLog',
+      meta: { title: '日志' },
+      component: () => import('../views/product/Log')
     }
   ]
 })

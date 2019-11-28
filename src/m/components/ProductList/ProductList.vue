@@ -1,18 +1,18 @@
 <template>
   <van-list
     v-model="loading"
-    :finished="finished"
+    :finished="true"
     loading-text="加载中..."
     @load="onLoad"
   >
     <div class=" productList">
-      <div class="productItem" v-for="(item,i) in productList" :key="i">
+      <div class="productItem" v-for="(item,i) in getList" :key="i">
         <van-panel class="productPanel">
           <div slot="header" class="header">
             <div class="id">ID:{{ item.id }}</div>
             <div class="status">{{ item.status }}</div>
           </div>
-          <div class="content">
+          <div class="content" @click="viewProduct(item)">
             <div class="productName">{{ item.productName }}</div>
             <div class="supplyName">供应商：{{ item.supplyName }}</div>
             <div class="productTag">
@@ -20,9 +20,9 @@
             </div>
           </div>
           <div slot="footer" class="btn">
-            <van-button size="small" plain hairline >删除</van-button>
-            <van-button size="small" plain hairline >复制</van-button>
-            <van-button size="small" plain hairline type="danger">提审</van-button>
+            <van-button size="small" plain hairline @click="productDelete(item)">删除</van-button>
+            <van-button size="small" plain hairline @click="productCopy(item)">复制</van-button>
+            <van-button size="small" plain hairline type="danger" @click="productAudit(item)">提审</van-button>
           </div>
         </van-panel>
       </div>
@@ -48,6 +48,11 @@ export default {
   mounted () {
     console.log(this.productList)
   },
+  computed: {
+    getList: function () {
+      return this.productList
+    }
+  },
   methods: {
     onLoad () {
       // 异步更新数据
@@ -62,6 +67,18 @@ export default {
           this.finished = true
         }
       }, 800)
+    },
+    viewProduct (item) {
+      this.$emit('viewProduct', item)
+    },
+    productDelete (item) {
+      this.$emit('productDelete', item)
+    },
+    productCopy (item) {
+      this.$emit('productCopy', item)
+    },
+    productAudit (item) {
+      this.$emit('productAudit', item)
     }
   }
 }

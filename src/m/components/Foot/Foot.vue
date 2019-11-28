@@ -3,7 +3,11 @@
     <slot/>
   </div>
 </template>
-
+<script>
+export default {
+  name: 'Foot'
+}
+</script>
 <style lang="less" scoped>
 .footer{
   position: fixed;
@@ -15,5 +19,6 @@
   padding: 5px 16px;
   width: 100%;
   z-index: 1000;
+  display: flex
 }
 </style>

@@ -5,7 +5,7 @@
       <span>周末酒店商户版</span>
     </div>
     <van-cell-group>
-      <van-cell title="版本号" value="v1.0" size="large" />
+      <van-cell v-if="deviceType" title="版本号" :value="appVerNo" size="large" />
       <van-cell title="官网" value="www.zmjiudian.com" url="http://www.zmjiudian.com" size="large"/>
     </van-cell-group>
   </div>
@@ -13,11 +13,14 @@
 
 <script>
 import zmLogo from '@/assets/m/image/Mask.svg'
+import zmDevice from '../../../utils/native'
 export default {
   name: 'About',
   data () {
     return {
-      zmLogo: zmLogo
+      zmLogo: zmLogo,
+      deviceType: zmDevice.isZmApp,
+      appVerNo: zmDevice.appVerNo
     }
   }
 }

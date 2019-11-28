@@ -18,7 +18,7 @@
       </van-cell>
     </van-cell-group>
     <!-- 新增按钮 -->
-    <div class="addBtn">
+    <div class="addBtn" v-if="nameList.length<=0">
       <div class="desc">数据库暂无您输入的基础商品，是否新增？</div>
       <van-button class="btn" color="#FF4444">
         <van-icon name="add-o" />新增
