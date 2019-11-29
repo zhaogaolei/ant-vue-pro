@@ -17,7 +17,7 @@
 
 <script>
 import productLogo from '@/assets/m/image/plogo.svg'
-import mixin from '../../nativeMixin'
+import mixin from '@m/nativeMixin'
 export default {
   name: 'Home',
   mixins: [ mixin ],

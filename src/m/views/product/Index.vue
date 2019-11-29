@@ -25,22 +25,29 @@
       <van-tab title="通过" name="pass"></van-tab>
       <van-tab title="驳回" name="reject"></van-tab>
     </van-tabs>
-    <product-list
+    <van-list
       class="vantabs"
-      :productList="productList"
-      @viewProduct="viewProduct"
-      @productDelete="onDelete"
-      @productCopy="onPopSkuShow"
-      @productAudit="onAudit"/>
-    <van-action-sheet
-      v-model="show"
-      :round="false"
-      :close-on-click-action="true"
-      :actions="actions"
-      cancel-text="取消"
-      @cancel="onCancel"
-      @select="onSelect"
-    />
+      v-model="loading"
+      :finished="false"
+      loading-text="加载中..."
+      @load="onLoad"
+    >
+      <product-list
+        :productList="productList"
+        @viewProduct="viewProduct"
+        @productDelete="onDelete"
+        @productCopy="onPopSkuShow"
+        @productAudit="onAudit"/>
+      <van-action-sheet
+        v-model="show"
+        :round="false"
+        :close-on-click-action="true"
+        :actions="actions"
+        cancel-text="取消"
+        @cancel="onCancel"
+        @select="onSelect"
+      />
+    </van-list>
     <sku-copy
       :isShowPopup="isShowSkuCopy"
       @callBackCancel="()=>{this.isShowSkuCopy=false}"
@@ -51,12 +58,13 @@
 
 <script>
 // eslint-disable-next-line import/no-duplicates
-import ProductList from '../../components/ProductList'
+import ProductList from '@m/components/ProductList'
 // eslint-disable-next-line import/no-duplicates
-import ProductAuditList from '../../components/ProductList'
+import ProductAuditList from '@m/components/ProductList'
 
-import SkuCopy from '../../components/SkuCopy'
-import { DialogConfirm, DialogAlert } from '../../utils/dialog'
+import SkuCopy from '@m/components/SkuCopy'
+import { DialogConfirm, DialogAlert } from '@m/utils/dialog'
+import { getOpLog } from '@/api/log'
 const list = [
   { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' },
   { id: '2323567', status: '驳回', productName: '玛雅水上公园秋季门票', supplyName: '东方', productTag: '玩乐' },
@@ -71,6 +79,8 @@ export default {
   },
   data () {
     return {
+      loading: false,
+      finished: false,
       tabType: 'all',
       show: false,
       isShowSkuCopy: false,
@@ -97,8 +107,25 @@ export default {
     }
   },
   mounted () {
+    getOpLog().then(res => {
+      console.log(res)
+    })
   },
   methods: {
+    onLoad () {
+      // 异步更新数据
+      const oneData = { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' }
+      setTimeout(() => {
+        this.productList.push(oneData)
+        // 加载状态结束
+        this.loading = false
+
+        // 数据全部加载完成
+        if (this.productList.length >= 10) {
+          this.finished = true
+        }
+      }, 300)
+    },
     onTabClick (name, title) {
       console.log(name, title)
       this.searchText = ''

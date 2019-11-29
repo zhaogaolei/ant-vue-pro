@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import ZmButton from '../../components/Button'
+import ZmButton from '@m/components/Button'
 export default {
   name: 'SupplyEdit',
   components: { ZmButton },

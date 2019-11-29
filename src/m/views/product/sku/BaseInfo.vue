@@ -50,7 +50,7 @@
 <script>
 import Vue from 'vue'
 import { ImagePreview } from 'vant'
-import PopupList from '../../../components/PopupList'
+import PopupList from '@m/components/PopupList'
 Vue.use(ImagePreview)
 const images = [
   'https://img.yzcdn.cn/vant/cat.jpeg',

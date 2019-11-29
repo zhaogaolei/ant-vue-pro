@@ -103,13 +103,13 @@
 <script>
 import Vue from 'vue'
 import { ImagePreview } from 'vant'
-import Foot from '../../components/Foot'
-import PopupList from '../../components/PopupList'
-import toast from '../../utils/toast'
-import { getParams } from '../../utils/tools'
+import Foot from '@m/components/Foot'
+import PopupList from '@m/components/PopupList'
+import toast from '@m/utils/toast'
+import { getParams } from '@m/utils/tools'
 import { setDocumentTitle, domTitle } from '@/utils/domUtil'
-import { DialogNativeAppConfirm } from '../../utils/dialog'
-import constants from '../../constants'
+import { DialogNativeAppConfirm } from '@m/utils/dialog'
+import constants from '@m/constants'
 const { nativeApi } = constants
 Vue.use(ImagePreview)
 const images = [

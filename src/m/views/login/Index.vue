@@ -50,8 +50,8 @@ import md5 from 'md5'
 import { mapActions } from 'vuex'
 import zmLogo from '@/assets/m/image/Mask.svg'
 import { zmLogin } from '@/api/login'
-import zmDevice from '../../utils/native'
-import constants from '../../constants'
+import zmDevice from '@m/utils/native'
+import constants from '@m/constants'
 const { nativeApi } = constants
 
 export default {

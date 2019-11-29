@@ -1,43 +1,33 @@
 <template>
-  <van-list
-    v-model="loading"
-    :finished="true"
-    loading-text="加载中..."
-    @load="onLoad"
-  >
-    <div class=" productList">
-      <div class="productItem" v-for="(item,i) in getList" :key="i">
-        <van-panel class="productPanel">
-          <div slot="header" class="header">
-            <div class="id">ID:{{ item.id }}</div>
-            <div class="status">{{ item.status }}</div>
+  <div class=" productList">
+    <div class="productItem" v-for="(item,i) in getList" :key="i">
+      <van-panel class="productPanel">
+        <div slot="header" class="header">
+          <div class="id">ID:{{ item.id }}</div>
+          <div class="status">{{ item.status }}</div>
+        </div>
+        <div class="content" @click="viewProduct(item)">
+          <div class="productName">{{ item.productName }}</div>
+          <div class="supplyName">供应商：{{ item.supplyName }}</div>
+          <div class="productTag">
+            <span>{{ item.productTag }}</span>
           </div>
-          <div class="content" @click="viewProduct(item)">
-            <div class="productName">{{ item.productName }}</div>
-            <div class="supplyName">供应商：{{ item.supplyName }}</div>
-            <div class="productTag">
-              <span>{{ item.productTag }}</span>
-            </div>
-          </div>
-          <div slot="footer" class="btn">
-            <van-button size="small" plain hairline @click="productDelete(item)">删除</van-button>
-            <van-button size="small" plain hairline @click="productCopy(item)">复制</van-button>
-            <van-button size="small" plain hairline type="danger" @click="productAudit(item)">提审</van-button>
-          </div>
-        </van-panel>
-      </div>
+        </div>
+        <div slot="footer" class="btn">
+          <van-button size="small" plain hairline @click="productDelete(item)">删除</van-button>
+          <van-button size="small" plain hairline @click="productCopy(item)">复制</van-button>
+          <van-button size="small" plain hairline type="danger" @click="productAudit(item)">提审</van-button>
+        </div>
+      </van-panel>
     </div>
-  </van-list>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'ProductList',
   data () {
-    return {
-      loading: false,
-      finished: false
-    }
+    return { }
   },
   props: {
     productList: {
@@ -54,20 +44,6 @@ export default {
     }
   },
   methods: {
-    onLoad () {
-      // 异步更新数据
-      const oneData = { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' }
-      setTimeout(() => {
-        this.productList.push(oneData)
-        // 加载状态结束
-        this.loading = false
-
-        // 数据全部加载完成
-        if (this.productList.length >= 15) {
-          this.finished = true
-        }
-      }, 800)
-    },
     viewProduct (item) {
       this.$emit('viewProduct', item)
     },

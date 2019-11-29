@@ -30,10 +30,10 @@
 
 <script>
 import Vue from 'vue'
-import homeIconActive from '../../assets/m/image/home@1x.png'
-import homeIconInActive from '../../assets/m/image/home@1x-2.png'
-import mineIconActive from '../../assets/m/image/mine@1x.png'
-import minehomeIconActiveIcon from '../../assets/m/image/mine@1x-2.png'
+import homeIconActive from '@/assets/m/image/home@1x.png'
+import homeIconInActive from '@/assets/m/image/home@1x-2.png'
+import mineIconActive from '@/assets/m/image/mine@1x.png'
+import minehomeIconActiveIcon from '@/assets/m/image/mine@1x-2.png'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { SET_ACTIVE_STATUS } from '../store/mutation-types'
 import { local } from '../utils/storage'

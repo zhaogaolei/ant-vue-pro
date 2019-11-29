@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { DialogConfirm, DialogAlert } from '../../utils/dialog'
+import { DialogConfirm, DialogAlert } from '@m/utils/dialog'
 
 export default {
   name: 'ProductPicture',

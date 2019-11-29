@@ -52,7 +52,7 @@
 
 <script>
 import arealist from './area'
-import ZmButton from '../../components/Button'
+import ZmButton from '@m/components/Button'
 export default {
   name: 'ProductAddress',
   components: { ZmButton },

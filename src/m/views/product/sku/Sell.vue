@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { formatDate } from '../../../utils/tools'
+import { formatDate } from '@m/utils/tools'
 export default {
   data () {
     return {

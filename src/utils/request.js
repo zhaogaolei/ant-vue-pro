@@ -4,6 +4,8 @@ import store from '@/store'
 import notification from 'ant-design-vue/es/notification'
 import { VueAxios } from './axios'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
+import zmDevice from '../m/utils/native'
+import toast from '../m/utils/toast'
 
 // 创建 axios 实例
 const service = axios.create({
@@ -44,11 +46,15 @@ service.interceptors.request.use(config => {
   if (token) {
     config.headers['Access-Token'] = token // 让每个请求携带自定义 token 请根据实际情况自行修改
   }
+  console.log(zmDevice)
+
   return config
 }, err)
 
 // response interceptor
 service.interceptors.response.use((response) => {
+  // toast.info('统一处理错误提示！！！')
+  console.log(response)
   return response.data
 }, err)
 

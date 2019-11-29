@@ -36,14 +36,13 @@ toast.fail = (msg, duration = 3000) => {
 toast.info = (msg, duration = 3000) => {
   Toast({
     message: msg,
-    position: 'middle', // top bottom
+    position: 'middle', // top bottom  middle
     duration: duration
   })
 }
 
 // 关闭
 toast.hide = () => {
-  console.log(1)
   Toast.clear()
 }
 

@@ -13,7 +13,7 @@
 
 <script>
 import zmLogo from '@/assets/m/image/Mask.svg'
-import zmDevice from '../../../utils/native'
+import zmDevice from '@m/utils/native'
 export default {
   name: 'About',
   data () {

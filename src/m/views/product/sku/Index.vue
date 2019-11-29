@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Foot from '../../../components/Foot'
+import Foot from '@m/components/Foot'
 import SkuBaseInfo from './BaseInfo'
 import SkuSell from './Sell'
 import SkuContent from './Content'

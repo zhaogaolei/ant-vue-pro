@@ -11,9 +11,6 @@ import '../assets/iconfont/iconfont.css'
 import '../utils/setRem'
 import gourl from './utils/gourl'
 
-import Vconsole from 'vconsole'
-const vConsole = new Vconsole()
-
 Vue.config.productionTip = false
 Vue.prototype.$gourl = gourl
 new Vue({

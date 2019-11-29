@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import { SET_ACTIVE_STATUS } from '../../store/mutation-types'
-import zmDevice from '../../utils/native'
-import mixin from '../../nativeMixin'
+import { SET_ACTIVE_STATUS } from '@m/store/mutation-types'
+import zmDevice from '@m/utils/native'
+import mixin from '@m/nativeMixin'
 export default {
   name: 'My',
   mixins: [ mixin ],
