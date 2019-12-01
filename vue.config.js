@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const VconsolePlugin = require('vconsole-webpack-plugin')
 const createThemeColorReplacerPlugin = require('./config/plugin.config')
 
 function resolve (dir) {
@@ -38,7 +39,7 @@ const objectProject = {
     template: 'public/index.html', // 模板来源
     filename: 'index.html', // 在 dist/index.html 的输出
     // 当使用 title 选项时，template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-    title: 'PC',
+    title: '',
     // 在这个页面中包含的块，默认情况下会包含,提取出来的通用 chunk 和 vendor chunk。
     chunks: ['chunk-vendors', 'chunk-common', 'index']
   },
@@ -46,7 +47,7 @@ const objectProject = {
     entry: 'src/m/main.js',
     template: 'src/m/mobile.html',
     filename: process.env.NODE_ENV === 'development' ? 'm.html' : 'index.html',
-    title: 'Mobile',
+    title: '',
     chunks: ['chunk-vendors', 'chunk-common', 'm']
   }
 }
@@ -70,7 +71,11 @@ const vueConfig = {
     // webpack plugins
     plugins: [
       // Ignore all locale files of moment.js
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new VconsolePlugin({
+        filter: [],
+        enable: !isProd() // 生产环境去除
+      })
     ]
     // if prod is on, add externals
     // externals: isProd() ? prodExternals : {}
@@ -79,6 +84,7 @@ const vueConfig = {
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@$', resolve('src'))
+      .set('@m', resolve('src/m'))// m项目直接使用@m
 
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()

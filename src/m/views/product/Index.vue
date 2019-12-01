@@ -6,7 +6,6 @@
         class="searchInput"
         placeholder="搜索产品"
         left-icon="search"
-        @input="onSearch"
       />
       <van-icon class="searchIcon" name="icon iconfont icon-tianjiashangpin" @click="onShowActionSheet"/>
     </div>
@@ -25,29 +24,25 @@
       <van-tab title="通过" name="pass"></van-tab>
       <van-tab title="驳回" name="reject"></van-tab>
     </van-tabs>
-    <van-list
-      class="vantabs"
-      v-model="loading"
-      :finished="false"
-      loading-text="加载中..."
-      @load="onLoad"
-    >
-      <product-list
-        :productList="productList"
-        @viewProduct="viewProduct"
-        @productDelete="onDelete"
-        @productCopy="onPopSkuShow"
-        @productAudit="onAudit"/>
-      <van-action-sheet
-        v-model="show"
-        :round="false"
-        :close-on-click-action="true"
-        :actions="actions"
-        cancel-text="取消"
-        @cancel="onCancel"
-        @select="onSelect"
-      />
-    </van-list>
+
+    <product-list
+      :tabType="this.tabType"
+      :searchText="this.searchText"
+      @viewProduct="viewProduct"
+      @productDelete="onDelete"
+      @productCopy="onPopSkuShow"
+      @productAudit="onAudit" />
+
+    <van-action-sheet
+      v-model="show"
+      :round="false"
+      :close-on-click-action="true"
+      :actions="actions"
+      cancel-text="取消"
+      @cancel="onCancel"
+      @select="onSelect"
+    />
+
     <sku-copy
       :isShowPopup="isShowSkuCopy"
       @callBackCancel="()=>{this.isShowSkuCopy=false}"
@@ -57,30 +52,19 @@
 </template>
 
 <script>
-// eslint-disable-next-line import/no-duplicates
 import ProductList from '@m/components/ProductList'
-// eslint-disable-next-line import/no-duplicates
-import ProductAuditList from '@m/components/ProductList'
 
 import SkuCopy from '@m/components/SkuCopy'
 import { DialogConfirm, DialogAlert } from '@m/utils/dialog'
 import { getOpLog } from '@/api/log'
-const list = [
-  { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' },
-  { id: '2323567', status: '驳回', productName: '玛雅水上公园秋季门票', supplyName: '东方', productTag: '玩乐' },
-  { id: '2323568', status: '待审核', productName: '上海植物园单日游', supplyName: '东方', productTag: '玩乐' },
-  { id: '2323569', status: '通过', productName: '东方明珠一日游', supplyName: '东方', productTag: '玩乐' },
-  { id: '2323570', status: '审核中', productName: '欢乐谷3日游', supplyName: '东方', productTag: '玩乐' }
-]
+
 export default {
   name: 'MProduct',
   components: {
-    ProductList, ProductAuditList, SkuCopy
+    ProductList, SkuCopy
   },
   data () {
     return {
-      loading: false,
-      finished: false,
       tabType: 'all',
       show: false,
       isShowSkuCopy: false,
@@ -88,22 +72,9 @@ export default {
         { name: '美食', key: 'ms' },
         { name: '玩乐' }
       ],
-      productList: list,
-      arraignmentList: [
-        { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' }
-      ],
-      auditList: [
-        { id: '2323568', status: '待审核', productName: '上海植物园单日游', supplyName: '东方', productTag: '玩乐' }
-      ],
-      passList: [
-        { id: '2323569', status: '通过', productName: '东方明珠一日游', supplyName: '东方', productTag: '玩乐' }
-      ],
-      rejectList: [
-        { id: '2323567', status: '驳回', productName: '玛雅水上公园秋季门票', supplyName: '东方', productTag: '玩乐' }
-      ],
+
       selectedProduct: {},
-      searchText: '',
-      tmpList: list
+      searchText: ''
     }
   },
   mounted () {
@@ -112,48 +83,10 @@ export default {
     })
   },
   methods: {
-    onLoad () {
-      // 异步更新数据
-      const oneData = { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' }
-      setTimeout(() => {
-        this.productList.push(oneData)
-        // 加载状态结束
-        this.loading = false
-
-        // 数据全部加载完成
-        if (this.productList.length >= 10) {
-          this.finished = true
-        }
-      }, 300)
-    },
     onTabClick (name, title) {
       console.log(name, title)
       this.searchText = ''
-      if (name === 'all') {
-        this.productList = list
-      }
-      if (name === 'arraignment') {
-        this.productList = this.arraignmentList
-      }
-      if (name === 'audit') {
-        this.productList = this.auditList
-      }
-      if (name === 'pass') {
-        this.productList = this.passList
-      }
-      if (name === 'reject') {
-        this.productList = this.rejectList
-      }
-      this.tmpList = this.productList
       this.tabType = name
-    },
-    onSearch () {
-      console.log('查询', this.productList, this.tmpList)
-      if (this.searchText === '') {
-        this.productList = this.tmpList
-      } else {
-        this.productList = this.tmpList.filter((f, i) => f.productName.indexOf(this.searchText) > -1)
-      }
     },
     // actionsheet 操作方法
     onShowActionSheet () {

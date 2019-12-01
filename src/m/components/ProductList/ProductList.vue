@@ -1,42 +1,126 @@
 <template>
-  <div class=" productList">
-    <div class="productItem" v-for="(item,i) in getList" :key="i">
-      <van-panel class="productPanel">
-        <div slot="header" class="header">
-          <div class="id">ID:{{ item.id }}</div>
-          <div class="status">{{ item.status }}</div>
-        </div>
-        <div class="content" @click="viewProduct(item)">
-          <div class="productName">{{ item.productName }}</div>
-          <div class="supplyName">供应商：{{ item.supplyName }}</div>
-          <div class="productTag">
-            <span>{{ item.productTag }}</span>
+  <van-list
+    class="vantabs"
+    v-model="loading"
+    :finished="finished"
+    loading-text="加载中..."
+    :immediate-check="false"
+    @load="onLoad"
+    ref="vanListDom"
+  >
+    <div class=" productList">
+      <div class="productItem" v-for="(item,i) in getList" :key="i">
+        <van-panel class="productPanel">
+          <div slot="header" class="header">
+            <div class="id">ID:{{ item.id }}</div>
+            <div class="status">{{ item.status }}</div>
           </div>
-        </div>
-        <div slot="footer" class="btn">
-          <van-button size="small" plain hairline @click="productDelete(item)">删除</van-button>
-          <van-button size="small" plain hairline @click="productCopy(item)">复制</van-button>
-          <van-button size="small" plain hairline type="danger" @click="productAudit(item)">提审</van-button>
-        </div>
-      </van-panel>
+          <div class="content" @click="viewProduct(item)">
+            <div class="productName">{{ item.productName }}</div>
+            <div class="supplyName">供应商：{{ item.supplyName }}</div>
+            <div class="productTag">
+              <span>{{ item.productTag }}</span>
+            </div>
+          </div>
+          <div slot="footer" class="btn">
+            <van-button size="small" plain hairline @click="productDelete(item)">删除</van-button>
+            <van-button size="small" plain hairline @click="productCopy(item)">复制</van-button>
+            <van-button size="small" plain hairline type="danger" @click="productAudit(item)">提审</van-button>
+          </div>
+        </van-panel>
+      </div>
     </div>
-  </div>
+  </van-list>
 </template>
 
 <script>
+const list = [
+  { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' },
+  { id: '2323567', status: '驳回', productName: '玛雅水上公园秋季门票', supplyName: '东方', productTag: '玩乐' },
+  { id: '2323568', status: '待审核', productName: '上海植物园单日游', supplyName: '东方', productTag: '玩乐' },
+  { id: '2323569', status: '通过', productName: '东方明珠一日游', supplyName: '东方', productTag: '玩乐' },
+  { id: '2323570', status: '审核中', productName: '欢乐谷3日游', supplyName: '东方', productTag: '玩乐' }
+]
 export default {
   name: 'ProductList',
   data () {
-    return { }
+    return {
+      timer: null,
+      loading: false,
+      finished: false,
+      productList: list,
+      arraignmentList: [
+        { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' },
+        { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' },
+        { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' },
+        { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' },
+        { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' },
+        { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' },
+        { id: '2323566', status: '待提审', productName: '自助海鲜222', supplyName: '东方', productTag: '美食' }
+      ],
+      auditList: [
+        { id: '2323568', status: '待审核', productName: '上海植物园单日游', supplyName: '东方', productTag: '玩乐' }
+      ],
+      passList: [
+        { id: '2323569', status: '通过', productName: '东方明珠一日游', supplyName: '东方', productTag: '玩乐' }
+      ],
+      rejectList: [
+        { id: '2323567', status: '驳回', productName: '玛雅水上公园秋季门票', supplyName: '东方', productTag: '玩乐' }
+      ],
+      tempList: list // 测试用
+    }
   },
   props: {
-    productList: {
-      type: Array,
-      default: () => []
+    tabType: {
+      type: String,
+      default: 'all'
+    },
+    searchText: {
+      type: String,
+      default: ''
+    }
+  },
+  updated () { },
+  watch: {
+    tabType: function (value) {
+      const { tabType } = this
+      this.loading = false
+      this.finished = false
+      console.log(this.$refs.vanListDom.$el.getBoundingClientRect(), value)
+      // this.$refs.vanListDom.check()
+      // this.$nextTick(() => {
+      //   console.log(this.$refs.vanListDom.$el)
+      this.$refs.vanListDom.$el.scrollTop = 0
+      // })
+
+      if (tabType === 'all') {
+        this.productList = list
+      }
+      if (tabType === 'arraignment') {
+        this.productList = this.arraignmentList
+      }
+      if (tabType === 'audit') {
+        this.productList = this.auditList
+      }
+      if (tabType === 'pass') {
+        this.productList = this.passList
+      }
+      if (tabType === 'reject') {
+        this.productList = this.rejectList
+      }
+      this.tempList = this.productList
+    },
+    searchText: function (value) {
+      console.log('查询', this.productList, this.tmpList)
+      if (this.searchText === '') {
+        this.productList = this.tempList
+      } else {
+        this.productList = this.tempList.filter((f, i) => f.productName.indexOf(this.searchText) > -1)
+      }
     }
   },
   mounted () {
-    console.log(this.productList)
+    console.log(this.finished)
   },
   computed: {
     getList: function () {
@@ -44,6 +128,22 @@ export default {
     }
   },
   methods: {
+    onLoad () {
+      // 异步更新数据
+      const oneData = { id: '2323566', status: '待提审', productName: '自助海鲜', supplyName: '东方', productTag: '美食' }
+      this.timer = setTimeout(() => {
+        this.productList.push(oneData)
+        // 加载状态结束
+        this.loading = false
+
+        // 数据全部加载完成
+        if (this.productList.length >= 10) {
+          this.finished = true
+        } else {
+          this.finished = false
+        }
+      }, 800)
+    },
     viewProduct (item) {
       this.$emit('viewProduct', item)
     },
